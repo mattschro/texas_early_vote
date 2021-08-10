@@ -1,0 +1,10 @@
+name: 12020_early_vote
+title:
+username:
+account: spark148
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3380735
+bundleId: 3967993
+url: https://spark148.shinyapps.io/12020_early_vote/
+when: 1607556549.10783

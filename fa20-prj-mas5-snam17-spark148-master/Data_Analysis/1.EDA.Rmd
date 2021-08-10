@@ -1,0 +1,94 @@
+
+Now that we know about the background of project and understand where the data came from, let's analyze the data.
+
+First, we are going to look historical general election and early vote data for the state of Texas. We are going to specifically analyze General_Election_Data.csv and Early_Vote_Data.csv.
+
+### Historical General Election Data
+
+```{r, include  = FALSE}
+# Reading in the data + importing tidyverse
+library(tidyverse)
+library(data.table)
+library(reshape2)
+General_Election_Data <- read.csv("../Data_Wrangling/Final_data/2.General_Election_Data.csv")
+
+# Plotting the data
+GeneralElectionVisualization <- ggplot(General_Election_Data, aes(x=year,y=candidatevotes/totalvotes)) +
+  geom_point(aes(color = party)) +
+  ggtitle("Two Party Candidate Vote Share by Year Since 1976") +
+  ylab("Vote % by Party") +
+  xlab("Year") + 
+  scale_color_manual(values=c("#1E90FF", "#FF0000"))
+```
+
+```{r, echo = FALSE}
+GeneralElectionVisualization
+```
+
+As we can see, the last time a Democrat won the state of Texas was when Jimmy Carter won the state in 1976, almost 50 years ago. It is important to note that the two party vote share for both candidates was low in the 1992 and 1996 election cycles as third party candidate Ross Perot captured 22.01% and 6.75% of the total Texas vote in these respective cycles, hurting the percentage of the vote that went to the two major parties.
+
+Historically, Texas has not been very close, as most years the margin of victory in the state was larger than 5%. However, while this is not shown on the graph, in FiveThirtyEight's final polling average for Texas in 2020, Trump was polling at 48.6% while Biden was polling at 47.4%, which is a difference of 1.2%. Additionally as examined in more detail later, the results from the 2018 midterm election were closer than the 2016 Presidential election.
+
+*Source: https://projects.fivethirtyeight.com/2020-election-forecast/texas/*
+
+### Historical Early Vote and Mail Data
+
+Now let's look at the historical Presidential election early vote data. There are some important things to note before starting the analyses.
+
+For the early vote and mail data in Presidential elections before this election cycle, there is unfortunately limited data available. Such is the reality of conducting real world statistical analyses. For the years 1996 to 2016 we only have access to the top 15 most populous counties in terms of non suspended voters. In 2020 we have access to the early vote in all counties.
+
+Thus, to keep consistent with the other years, we break this problem up into two cases. In the first case, we all of the counties in 2020. In the second case, we only include the top 15 counties in terms of non-suspended voters, keeping consistent with the data before the 2020 election cycle.
+
+
+```{r,include=FALSE}
+# Reading in the dataset
+Early_Vote_Data <- read_csv("../Data_Wrangling/Final_data/1.Early_Vote_Data.csv")
+
+# Case 1: EVD = all counties in 2020 are included
+EVD <- Early_Vote_Data %>% arrange(Year, -Non_Suspense_Voters)
+
+# Case 2: New_EVD15 = only 15 counties in 2020 are included
+New_EVD15 <- EVD[1:105,]
+New_EVD15
+```
+
+```{r,include=FALSE}
+# Case 1: Input = EVD (all counties in 2020 are included); Output = Final_EVD
+(Final_EVD <- EVD  %>% group_by(Year) %>%  summarise(avg_early = mean(Cumulative_Percent_Early_Vote), avg_mail = mean(Cumulative_By_Mail_Percent)))
+
+# Case 2: Input = New_EVD15 (only 15 counties in 2020 are included); Output = Final_EVD15
+(Final_EVD15 <- New_EVD15  %>% group_by(Year) %>%  summarise(avg_early = mean(Cumulative_Percent_Early_Vote), avg_mail = mean(Cumulative_By_Mail_Percent)))
+```
+```{r, echo = FALSE}
+colnames(Final_EVD) <- c("Year", "Avg_In_Person", "Avg_Mail")
+Final_EVD_graph <- reshape2::melt(Final_EVD, id.vars = 'Year')
+EVD_visual <- ggplot(Final_EVD_graph, aes(x=Year, y = value, fill = variable)) + geom_bar(stat = "identity", position= position_dodge()) + scale_x_continuous(breaks = Final_EVD_graph$Year) + labs(title = "Early Vote by Mail and In Person", x = "Year", y = "Cumulative Early Vote %") + scale_fill_discrete(name = "Voting Methods")+
+  geom_text(aes(label=round(value, 2), vjust = 1.1), position = position_dodge(3.5), size = 3)
+EVD_visual
+```
+```{r, echo = FALSE}
+colnames(Final_EVD15) <- c("Year", "Avg_In_Person", "Avg_Mail")
+Final_EVD15_graph <- reshape2::melt(Final_EVD15, id.vars = 'Year')
+EVD15_visual <- ggplot(Final_EVD15_graph, aes(x=Year, y = value, fill = variable)) + geom_bar(stat = "identity", position= position_dodge()) + scale_x_continuous(breaks = Final_EVD15_graph$Year) + labs(title = "Early Vote by Mail and In Person for the 15 Most Populous Counties", x = "Year", y = "Cumulative Early Vote %") + scale_fill_discrete(name = "Voting Methods")+
+  geom_text(aes(label=round(value, 2), vjust = 1.1), position = position_dodge(3.5), size = 3)
+EVD15_visual
+```
+
+Looking at the historical early vote data confirms that 2020 has deviated from the typical voting patterns in Texas in both cases, but particularly when we are consistent in restricting the data to the top 15 counties in terms of the number of non-suspended voters.
+
+In both cases, the average mail percentage reached a record high. The average of all counties across Texas in 2020 is 5.722402% and in the top 15 counties by non-suspended voters is slightly higher at 6.104667%. A difference of less than 1%.
+
+When comparing the early vote between the two cases there is a more stark difference. The average of all counties across Texas in 2020 is 55.08992% and in the top 15 counties by non-suspended voters is slightly higher at 66.02400. This is a difference of greater than 10%.
+
+The second case, where we are consistent in only including the top 15 counties by the number of non-suspended voters in 2020, is likely a better metric. It shows a more stark increase compared to the previous election cycles.
+
+In general, a larger percentage of the Texas population has voted early as time goes on. However, the 2020 election cycle set the record.
+
+
+
+
+
+
+
+
+

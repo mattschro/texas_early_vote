@@ -1,0 +1,7321 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)https://earlyvoting.texas-election.com/Elections/getEVDetails.do -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Elections</title>
+	<!-- Metadata Info -->
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1 ">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="./Oct_04_files/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<link href="./Oct_04_files/bootstrap.css" rel="stylesheet">
+	<link href="./Oct_04_files/normalize.css" rel="stylesheet">
+	<link href="./Oct_04_files/forms.css" rel="stylesheet">
+	<link href="./Oct_04_files/global.css" rel="stylesheet">
+	<link href="./Oct_04_files/custom.css" rel="stylesheet">
+	<link href="./Oct_04_files/compatible.css" rel="stylesheet">
+	
+
+
+<script type="text/javascript">
+	function downloadReport(townid) {
+		$("#idTown").val(townid);
+		$("#electionsInfoForm").attr("action", "/Elections/downloadVoterInfoReport.do");
+		document.electionsInfoForm.submit();
+	}
+	
+	function onPageLoad(){
+		
+	}
+	
+	function previousElectionsDatesScreen(){
+		$("#electionsInfoForm").attr("action", "/Elections/getElectionEVDates.do");
+		document.electionsInfoForm.submit();
+	}
+</script>
+</head>
+<body onload="onPageLoad()" data-new-gr-c-s-check-loaded="14.984.0" data-gr-ext-installed="">
+	<main> 
+
+
+
+
+	
+
+
+
+	<header>
+		<a href="https://earlyvoting.texas-election.com/Elections/getEVDetails.do#mainContent" class="hidden">Skip to Main Content</a>
+		<!-- <div id="header-alerts">
+			<span><strong>Election Outlook: </strong> <a href="/about/newsreleases/2019/041919.shtml">The Secretary of State Reminds Texans to Plan Their Trip to the Polls</a> &nbsp;<strong>|</strong>&nbsp; <a href="https://www.votetexas.gov/register-to-vote/need-id.html">More about Identification Requirements for Voting</a> &nbsp;<strong>|</strong>&nbsp; <a href="https://www.votetexas.gov/register-to-vote/index.html">Monday, October 7, 2019 is the last day to register to vote for the November 5, 2019 Uniform Election</a> &nbsp;<strong>|</strong>&nbsp; <a href="https://www.votetexas.gov/voting/what.html">What&rsquo;s on the Ballot?</a> &nbsp;<strong>|</strong>&nbsp; <a href="https://teamrv-mvp.sos.texas.gov/MVP/mvp.do">Am I Registered to Vote?</a> &nbsp;<strong>|</strong>&nbsp; <a href="https://enrpages.sos.state.tx.us/">Election Night Returns</a> &nbsp;|&nbsp;<a href="https://www.votetexas.gov/index.html"> Voter Information</a> &nbsp;<strong>|</strong>&nbsp; <a href="https://www.votetexas.gov/harvey/index.html">Voting Issues for Texas Harvey Evacuees</a> &nbsp;<strong>|</strong>&nbsp; <a href="/elections/conducting/2018-security-update.shtml">2018 Texas Election Security Update</a></span>
+		</div> -->
+		<div id="top_navigation">
+			<ul class="top_navigation">
+			   <li><a href="https://www.sos.texas.gov/index.html">Home</a> | </li>
+			   <li><a href="https://www.sos.texas.gov/about/index.shtml">About the Office </a>|</li>
+				<li><a href="https://www.sos.texas.gov/about/newsreleases/index.shtml">Press Releases</a> |</li>
+				<li><a href="https://www.sos.texas.gov/siteindex.shtml">Site Index</a> |</li>
+				<li><a href="https://www.sos.texas.gov/help.shtml">Help</a> |</li>
+				<li><a href="https://www.sos.texas.gov/contact.shtml">Contacts</a> |</li>
+				<li><a href="https://www.surveymonkey.com/r/sosweb"><strong>Web Survey</strong></a> |</li>
+				<li><a href="https://www.sos.texas.gov/sos_espanol.shtml">En Español</a></li>
+			</ul>
+		</div>
+		<div id="header"> 
+
+		<a href="https://www.sos.texas.gov/">
+			<img src="./Oct_04_files/header.jpg" width="630" height="96" alt="Office of the Texas Secretary of State"></a></div> 
+		
+		<div id="top-wrapper">
+		<div id="search"> 
+
+		<form id="ThunderstoneSearchForm" class="ThunderstoneForm" method="get" action="https://www.sos.texas.gov/search.shtml" style="margin:0;">
+		<input type="hidden" name="dropXSL" value="">
+		<input type="hidden" name="pr" value="default">
+		<input type="hidden" name="prox" value="page">
+		<input type="hidden" name="rorder" value="500">
+		<input type="hidden" name="rprox" value="500">
+		<input type="hidden" name="rdfreq" value="500">
+		<input type="hidden" name="rwfreq" value="500">
+		<input type="hidden" name="rlead" value="500">
+		<input type="hidden" name="sufs" value="0">
+		<input type="hidden" name="order" value="r">
+		<input type="hidden" name="rdepth" value="0">
+
+		<label for="query">Search for this:</label><input size="22" name="query" class=" queryAutocomplete" id="query" placeholder="Search" title="Search"><input type="submit" value="Go">
+		</form>
+
+		</div> 
+		
+		<div id="navcontainer">
+			<ul id="navlist">
+			<li id="active" class="dropdown">
+				<a href="https://www.sos.texas.gov/elections/index.shtml" onmouseout="popDown(&#39;HM_Menu2&#39;)" onmouseover="popUp(&#39;HM_Menu2&#39;,event)">Elections</a>
+				<div class="dropdown-content">
+					<a href="https://www.sos.state.tx.us/elections/index.shtml">Current Election Information</a>
+					<a href="https://www.votetexas.gov/">Voter Texas.gov - Voter Information</a>
+					<a href="https://www.sos.texas.gov/elections/laws/voter-registration-agencies.shtml">Voter Registration Agencies</a>
+					<a href="https://www.sos.state.tx.us/elections/conducting/index.shtml">Conducting Elections</a>
+					<a href="https://www.sos.texas.gov/elections/candidates/index.shtml">Candidate Information</a>
+					<a href="https://www.sos.texas.gov/elections/voter/current.shtml">Officials and Officeholders</a>
+		            <a href="https://www.sos.texas.gov/elections/historical/index.shtml">Election Results</a>
+		            <a href="https://www.sos.texas.gov/elections/laws/education-resources.shtml">Voter Education &amp; Seminar Information</a>
+		            <a href="https://www.sos.texas.gov/elections/hava/index.shtml">Help America Vote Act (HAVA) Funding</a>
+	              	<a href="https://www.sos.texas.gov/elections/funds/index.shtml">Election Funds Management</a>
+		            <a href="https://www.sos.texas.gov/elections/laws/resources_legal.shtml">Forms, Resources and Legal Library</a>
+		            <a href="https://www.sos.texas.gov/elections/laws/votingsystems.shtml">Voting Systems</a>
+		            <a href="https://www.votetexas.gov/faq/">Frequently Asked Questions (FAQs)</a>
+		            <a href="https://www.sos.texas.gov/elections/contact.shtml">Contact Us</a>
+				</div>
+			</li>
+			
+			<li id="active" class="dropdown">
+			<a href="https://www.sos.texas.gov/corp/index.shtml" onmouseout="popDown(&#39;HM_Menu5&#39;)" onmouseover="popUp(&#39;HM_Menu5&#39;,event)">Business Services</a> 
+				<div class="dropdown-content">
+				  <a href="https://www.sos.texas.gov/corp/index.shtml">Business Basics</a>
+					<a href="https://www.sos.texas.gov/corp/business-startup.shtml">Business Start-Up Information</a>
+					<a href="https://www.sos.texas.gov/corp/forms_option.shtml">Business Forms</a>  
+					<a href="https://www.sos.texas.gov/corp/options.shtml">Filing Options</a>
+					<a href="https://direct.sos.state.tx.us/help/help-corp.asp?pg=fee">Fee Schedule</a>
+					<a href="https://www.sos.texas.gov/corp/copies.shtml">Copies &amp; Certificates</a>
+					<a href="https://www.sos.texas.gov/corp/publicinfo.shtml">Access Entity Information</a>
+					<a href="https://www.sos.texas.gov/corp/registeredagents.shtml">Registered Agents</a>
+					<a href="https://www.sos.texas.gov/corp/nonprofit_org.shtml">Nonprofit Organizations</a>
+					<a href="https://www.sos.texas.gov/corp/foreign_outofstate.shtml">Foreign or Out-of-State Entities</a>
+					<a href="https://www.sos.texas.gov/ucc/index.shtml">Uniform Commercial Code</a>
+					<a href="https://www.sos.texas.gov/corp/tradepatents.shtml">Trademarks</a>
+					<a href="https://www.sos.texas.gov/corp/service-of-process.shtml">Service of Process</a>
+					<a href="https://www.sos.texas.gov/corp/business-law.shtml">Texas Business Law</a>
+					<a href="https://www.sos.texas.gov/corp/generalfaqs.shtml">Frequently Asked Questions (FAQs)</a>
+					<a href="https://www.sos.texas.gov/corp/contact.shtml">Contact Us</a>
+				</div>
+			</li>
+			
+			<li id="active" class="dropdown">
+			<a href="https://www.sos.texas.gov/statdoc/index.shtml" onmouseout="popDown(&#39;HM_Menu8&#39;)" onmouseover="popUp(&#39;HM_Menu8&#39;,event)">Notary, Apostilles &amp; Authentications</a>
+				<div class="dropdown-content">
+				        <a href="https://www.sos.texas.gov/statdoc/index.shtml">About  Notary Public and Apostille Services</a>
+					    <a href="https://www.sos.texas.gov/statdoc/statforms.shtml">Forms</a>
+						<a href="https://www.sos.texas.gov/statdoc/notary-public.shtml">Notary Public</a>
+						<a href="https://www.sos.texas.gov/authinfo.shtml">Apostilles/Authentication of Documents</a>
+					    <a href="https://www.sos.texas.gov/statdoc/faqs.shtml">Frequently Asked Questions (FAQs)</a>
+						<a href="https://www.sos.texas.gov/statdoc/contact.shtml">Contact Us</a>
+				</div>
+			</li>
+			<li id="active" class="dropdown">
+			<a href="https://www.sos.texas.gov/texreg/index.shtml" onmouseout="popDown(&#39;HM_Menu4&#39;)" onmouseover="popUp(&#39;HM_Menu4&#39;,event)">Rules &amp; Open Meetings</a>
+				<div class="dropdown-content">
+				    <a href="https://www.sos.texas.gov/texreg/index.shtml">Texas Register</a>
+					<a href="https://www.sos.texas.gov/tac/index.shtml">Texas Administrative Code</a>
+					<a href="https://www.sos.texas.gov/open/index.shtml">Open Meetings</a>
+					<a href="https://www.sos.texas.gov/texreg/subinfo.shtml">Subscription Services</a>
+					<a href="https://www.sos.texas.gov/texreg/transfers/index.shtml">Rule Transfers and Agency Name Changes</a>
+					<a href="https://www.sos.texas.gov/texreg/liaisons.shtml">Liaison General Info</a>
+					<a href="https://texreg.sos.state.tx.us/tac/liaison_center$.startup">Liaison Login</a>
+					<a href="https://www.sos.texas.gov/texreg/resources.shtml">Other Resources</a>
+					<a href="https://www.sos.texas.gov/texreg/faqs.shtml">Frequently Asked Questions (FAQs)</a>
+					<a href="https://www.sos.texas.gov/texreg/contact.shtml">Contact Us</a> 
+				</div>
+			</li>
+			<li id="active" class="dropdown">
+				<a href="https://www.sos.texas.gov/border/index.shtml" onmouseout="popDown(&#39;HM_Menu3&#39;)" onmouseover="popUp(&#39;HM_Menu3&#39;,event)">International Relations</a>
+				<div class="dropdown-content">
+				    <a href="https://www.sos.state.tx.us/border/index.shtml">Border Relations With Mexico</a>
+					<a href="https://www.sos.state.tx.us/border/intlprotocol/index.shtml">International Relations</a>
+					<a href="https://www.sos.state.tx.us/statdoc/notary-public.shtml#notariopublico">¿Notario Público?</a>
+					<a href="https://www.sos.state.tx.us/authinfo.shtml">Apostilles/Authentication of Documents</a>
+					<a href="https://www.sos.state.tx.us/border/contact.shtml">Contact Us</a>
+				</div>
+			</li>
+			<li id="active" class="dropdown">
+				<a href="https://www.sos.texas.gov/other/index.shtml" onmouseout="popDown(&#39;HM_Menu9&#39;)" onmouseover="popUp(&#39;HM_Menu9&#39;,event)">Forms &amp; Other Services</a>
+				<div class="dropdown-content">
+				    <a href="https://www.sos.state.tx.us/other/index.shtml">Other Services and Searches</a>
+					<a href="https://www.sos.state.tx.us/forms.shtml">Forms</a>
+					<a href="https://webservices.sos.state.tx.us/legbills/index.aspx">Legislative Bills</a>
+					<a href="https://www.sos.texas.gov/statdoc/cso.shtml">Credit Services Organizations</a>
+					<a href="https://www.sos.texas.gov/statdoc/seal.shtml">State Seal of Texas</a>
+					<a href="https://www.sos.texas.gov/statdoc/athlete-agents.shtml">Athlete Agents</a>
+					<a href="https://www.sos.texas.gov/statdoc/healthspas/index.shtml">Health Spas</a>
+					<a href="https://www.sos.texas.gov/other/faqs.shtml">Frequently Asked Questions (FAQs)</a>
+					<a href="https://www.sos.texas.gov/contact.shtml">Contact Us</a>
+				</div>
+			</li>
+			</ul>
+		</div>
+		</div>    
+	</header>
+	
+	<script language="javascript1.2" type="text/javascript">
+		//here you place the ids of every element you want.
+		//var ids=new Array('msg1','msg2','msg3','msg4');
+		var ids=new Array('msg1','msg2');
+		
+		function switchid(id){	
+			hideallids();
+			showdiv(id);
+		}
+		
+		function hideallids(){
+			//loop through the array and hide each element by id
+			for (var i=0;i<ids.length;i++){
+				hidediv(ids[i]);
+			}		  
+		}
+		
+		function hidediv(id) {
+			//safe function to hide an element with a specified id
+			if (document.getElementById) { // DOM3 = IE5, NS6
+				document.getElementById(id).style.display = 'none';
+			}
+			else {
+				if (document.layers) { // Netscape 4
+					document.id.display = 'none';
+				}
+				else { // IE 4
+					document.all.id.style.display = 'none';
+				}
+			}
+		}
+		
+		function showdiv(id) {
+			//safe function to show an element with a specified id
+				  
+			if (document.getElementById) { // DOM3 = IE5, NS6
+				document.getElementById(id).style.display = 'inline';
+			}
+			else {
+				if (document.layers) { // Netscape 4
+					document.id.display = 'inline';
+				}
+				else { // IE 4
+					document.all.id.style.display = 'inline';
+				}
+			}
+		}
+		</script>
+		
+	<script language="javascript" type="text/javascript">
+	
+	function MM_findObj(n, d) { //v4.0
+	  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+	    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+	  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+	  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+	  if(!x && document.getElementById) x=document.getElementById(n); return x;
+	}
+	
+	function MM_reloadPage(init) {  //reloads the window if Nav4 resized
+	  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
+	    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
+	  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
+	}
+	
+	MM_reloadPage(true);
+	
+	function MM_showHideLayers() { //v3.0
+	  var i,p,v,obj,args=MM_showHideLayers.arguments;
+	  for (i=0; i<(args.length-2); i+=3) if ((obj=MM_findObj(args[i]))!=null) { v=args[i+2];
+	    if (obj.style) { obj=obj.style; v=(v=='show')?'visible':(v='hide')?'hidden':v; }
+	    obj.visibility=v; }
+	}
+	
+	if(window.event + "" == "undefined") event = null;
+	function HM_f_PopUp(){return false};
+	function HM_f_PopDown(){return false};
+	popUp = HM_f_PopUp;
+	popDown = HM_f_PopDown;
+	
+	
+	</script>
+
+<script>
+	function toggle_visibility(id) {
+		var e = document.getElementById(id);
+		e.style.display = ((e.style.display!='none') ? 'none' : 'block');
+	}
+	
+</script>
+
+
+
+	<section class="content-wrapper">
+		<div class="container-fluid">
+			<form name="electionsInfoForm" id="electionsInfoForm" method="post">
+				<div class="row pt-4">
+					<div class="col-12 col-md-4 col-lg-3">
+						<ul class="custom-list">
+							<li>
+								<a href="https://www.votetexas.gov/" class="ui-link">
+									<img src="./Oct_04_files/logo_votetexas-1.png" alt="Visit VoteTexas.gov for voter specific information" width="164" height="54" border="0">
+								</a>
+							</li>
+							<li>
+								<a href="https://www.sos.texas.gov/elections/index.shtml" class="ui-link">Current Election Information</a>
+							</li>
+							<li>
+								<a href="https://www.sos.texas.gov/elections/laws/voter-registration-agencies.shtml" class="ui-link">Voter Registration Agencies</a>
+							</li>
+							<li>
+								<a href="https://www.sos.texas.gov/elections/conducting/index.shtml" class="ui-link">Conducting Elections</a>
+							</li>
+							<li>
+								<a href="https://www.sos.texas.gov/elections/candidates/index.shtml" class="ui-link">Candidate Information</a>
+							</li>
+							<li>
+								<a href="https://www.sos.texas.gov/elections/voter/current.shtml" class="ui-link">Officials and Officeholders</a>
+							</li>
+							<li>
+								<a href="https://www.sos.texas.gov/elections/historical/index.shtml" class="ui-link">Election Results</a>
+							</li>
+							<li>
+								<a href="https://www.sos.texas.gov/elections/laws/education-resources.shtml" class="ui-link">Voter Education &amp;<br> Seminar Information</a>
+							</li>
+							<li>
+								<a href="https://www.sos.texas.gov/elections/hava/index.shtml" class="ui-link">Help America Vote Act <br> (HAVA) Funding</a>
+							</li>
+							<li>
+								<a href="https://www.sos.texas.gov/elections/funds/index.shtml" class="ui-link">Election Funds Management</a>
+							</li>
+							<li>
+								<a href="https://www.sos.texas.gov/elections/laws/resources_legal.shtml" class="ui-link">Forms, Resources and <br> Legal Library</a>
+							</li>
+							<li>
+								<a href="https://www.sos.texas.gov/elections/laws/votingsystems.shtml" class="ui-link">Voting Systems</a>
+							</li>
+							<li>
+								<a href="https://www.votetexas.gov/faq/index.html" class="ui-link">Frequently Asked Questions (FAQs)</a>
+							</li>
+							<li>
+								<a href="https://www.sos.texas.gov/elections/contact.shtml" class="ui-link">Contact Us</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-12 col-md-8 col-lg-9">
+						<div class="form-group row ">
+							<h2 class="col-12">Early Voting - October 04, 2020</h2>
+							
+							<div>
+							<p class="col-md-12 col-lg-12 col-12 m-0" style="color: #ce1f26; font-size: 14px;">
+								
+							</p>
+							</div>
+						
+						<div>
+						&nbsp;
+						</div>
+							<div class="col-12">
+								<p class="text-center">
+									<strong>November 03, 2020<br>
+										GENERAL ELECTION<br>
+										Cumulative Totals<br> Thru Close of Business<br>
+										October 04, 2020
+									</strong>
+								</p>
+								<div class="table-responsive">
+									<table style="width: 75%;margin: 0px auto;" class="table table-bordered custom-table">
+										<thead>
+											<tr>
+												<th>County</th>
+												
+												<th>Registered Voters</th>
+												<th># In Person On 10/04/2020</th>
+												<th>Cumulative In-Person Voters</th>
+												<th>Cumulative % In-Person</th>
+												<th>Cumulative By Mail Voters</th>
+												<th>Cumulative In-Person And Mail Voters</th>
+												<th>Cumulative Percent Early Voting</th>
+												<th>Voter Details Report</th>
+											</tr>
+										</thead>
+										<tbody>
+											
+												<tr>
+													<th>ANDERSON</th>
+													
+													<td>
+														29,274
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														141
+													</td>
+													<td>141</td>
+													<td>0.48%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;1&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>ANDREWS</th>
+													
+													<td>
+														10,272
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1
+													</td>
+													<td>1</td>
+													<td>0.01%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;2&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>ANGELINA</th>
+													
+													<td>
+														53,166
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														970
+													</td>
+													<td>970</td>
+													<td>1.82%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;3&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>ARANSAS</th>
+													
+													<td>
+														18,306
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														11
+													</td>
+													<td>11</td>
+													<td>0.06%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;4&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>ARCHER</th>
+													
+													<td>
+														6,538
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;5&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>ARMSTRONG</th>
+													
+													<td>
+														1,498
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;6&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>ATASCOSA</th>
+													
+													<td>
+														29,409
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														9
+													</td>
+													<td>9</td>
+													<td>0.03%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;7&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>AUSTIN</th>
+													
+													<td>
+														20,293
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														11
+													</td>
+													<td>11</td>
+													<td>0.05%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;8&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BAILEY</th>
+													
+													<td>
+														3,539
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														36
+													</td>
+													<td>36</td>
+													<td>1.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;9&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BANDERA</th>
+													
+													<td>
+														17,098
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														14
+													</td>
+													<td>14</td>
+													<td>0.08%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;10&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BASTROP</th>
+													
+													<td>
+														52,096
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1,207
+													</td>
+													<td>1,207</td>
+													<td>2.32%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;11&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BAYLOR</th>
+													
+													<td>
+														2,408
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														33
+													</td>
+													<td>33</td>
+													<td>1.37%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;12&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BEE</th>
+													
+													<td>
+														16,033
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														6
+													</td>
+													<td>6</td>
+													<td>0.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;13&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BELL</th>
+													
+													<td>
+														215,974
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														44
+													</td>
+													<td>44</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;14&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BEXAR</th>
+													
+													<td>
+														1,189,373
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														9,616
+													</td>
+													<td>9,616</td>
+													<td>0.81%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;15&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BLANCO</th>
+													
+													<td>
+														9,344
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														5
+													</td>
+													<td>5</td>
+													<td>0.05%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;16&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BORDEN</th>
+													
+													<td>
+														499
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;17&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BOSQUE</th>
+													
+													<td>
+														12,724
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														18
+													</td>
+													<td>18</td>
+													<td>0.14%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;18&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BOWIE</th>
+													
+													<td>
+														61,407
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														11
+													</td>
+													<td>11</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;19&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BRAZORIA</th>
+													
+													<td>
+														224,256
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														2,889
+													</td>
+													<td>2,889</td>
+													<td>1.29%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;20&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BRAZOS</th>
+													
+													<td>
+														122,137
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														65
+													</td>
+													<td>65</td>
+													<td>0.05%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;21&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BREWSTER</th>
+													
+													<td>
+														7,524
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														15
+													</td>
+													<td>15</td>
+													<td>0.2%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;22&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BRISCOE</th>
+													
+													<td>
+														1,025
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														33
+													</td>
+													<td>33</td>
+													<td>3.22%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;23&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BROOKS</th>
+													
+													<td>
+														5,521
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														2
+													</td>
+													<td>2</td>
+													<td>0.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;24&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BROWN</th>
+													
+													<td>
+														23,954
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														5
+													</td>
+													<td>5</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;25&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BURLESON</th>
+													
+													<td>
+														12,440
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														159
+													</td>
+													<td>159</td>
+													<td>1.28%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;26&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>BURNET</th>
+													
+													<td>
+														33,697
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														851
+													</td>
+													<td>851</td>
+													<td>2.53%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;27&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CALDWELL</th>
+													
+													<td>
+														25,945
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1
+													</td>
+													<td>1</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;28&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CALHOUN</th>
+													
+													<td>
+														13,080
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														156
+													</td>
+													<td>156</td>
+													<td>1.19%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;29&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CALLAHAN</th>
+													
+													<td>
+														9,773
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														135
+													</td>
+													<td>135</td>
+													<td>1.38%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;30&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CAMERON</th>
+													
+													<td>
+														218,910
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														27
+													</td>
+													<td>27</td>
+													<td>0.01%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;31&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CAMP</th>
+													
+													<td>
+														7,904
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														40
+													</td>
+													<td>40</td>
+													<td>0.51%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;32&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CARSON</th>
+													
+													<td>
+														4,345
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														47
+													</td>
+													<td>47</td>
+													<td>1.08%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;33&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CASS</th>
+													
+													<td>
+														20,889
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;34&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CASTRO</th>
+													
+													<td>
+														3,853
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;35&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CHAMBERS</th>
+													
+													<td>
+														30,709
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														9
+													</td>
+													<td>9</td>
+													<td>0.03%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;36&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CHEROKEE</th>
+													
+													<td>
+														29,166
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														7
+													</td>
+													<td>7</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;37&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CHILDRESS</th>
+													
+													<td>
+														3,658
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1
+													</td>
+													<td>1</td>
+													<td>0.03%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;38&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CLAY</th>
+													
+													<td>
+														7,959
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														118
+													</td>
+													<td>118</td>
+													<td>1.48%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;39&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>COCHRAN</th>
+													
+													<td>
+														1,771
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;40&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>COKE</th>
+													
+													<td>
+														2,414
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;41&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>COLEMAN</th>
+													
+													<td>
+														5,960
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														92
+													</td>
+													<td>92</td>
+													<td>1.54%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;42&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>COLLIN</th>
+													
+													<td>
+														648,670
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														789
+													</td>
+													<td>789</td>
+													<td>0.12%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;43&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>COLLINGSWORTH</th>
+													
+													<td>
+														1,942
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;44&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>COLORADO</th>
+													
+													<td>
+														14,378
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														7
+													</td>
+													<td>7</td>
+													<td>0.05%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;45&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>COMAL</th>
+													
+													<td>
+														115,876
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;46&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>COMANCHE</th>
+													
+													<td>
+														9,562
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														5
+													</td>
+													<td>5</td>
+													<td>0.05%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;47&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CONCHO</th>
+													
+													<td>
+														1,757
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;48&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>COOKE</th>
+													
+													<td>
+														27,268
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														14
+													</td>
+													<td>14</td>
+													<td>0.05%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;49&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CORYELL</th>
+													
+													<td>
+														41,450
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														946
+													</td>
+													<td>946</td>
+													<td>2.28%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;50&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>COTTLE</th>
+													
+													<td>
+														1,041
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														17
+													</td>
+													<td>17</td>
+													<td>1.63%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;51&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CRANE</th>
+													
+													<td>
+														2,663
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														36
+													</td>
+													<td>36</td>
+													<td>1.35%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;52&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CROCKETT</th>
+													
+													<td>
+														2,473
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1
+													</td>
+													<td>1</td>
+													<td>0.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;53&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CROSBY</th>
+													
+													<td>
+														3,629
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;54&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>CULBERSON</th>
+													
+													<td>
+														1,709
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;55&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>DALLAM</th>
+													
+													<td>
+														3,046
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														2
+													</td>
+													<td>2</td>
+													<td>0.07%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;56&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>DALLAS</th>
+													
+													<td>
+														1,398,469
+													</td>
+													<td>
+														33
+													</td>
+													<td>
+														33
+													</td>
+													<td>0.0%</td>
+													<td>
+														8,617
+													</td>
+													<td>8,650</td>
+													<td>0.62%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;57&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>DAWSON</th>
+													
+													<td>
+														7,104
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;58&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>DEAF SMITH</th>
+													
+													<td>
+														8,900
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														140
+													</td>
+													<td>140</td>
+													<td>1.57%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;59&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>DELTA</th>
+													
+													<td>
+														3,949
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														83
+													</td>
+													<td>83</td>
+													<td>2.1%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;60&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>DENTON</th>
+													
+													<td>
+														565,089
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														4,033
+													</td>
+													<td>4,033</td>
+													<td>0.71%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;61&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>DEWITT</th>
+													
+													<td>
+														12,094
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														3
+													</td>
+													<td>3</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;62&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>DICKENS</th>
+													
+													<td>
+														1,328
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														31
+													</td>
+													<td>31</td>
+													<td>2.33%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;63&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>DIMMIT</th>
+													
+													<td>
+														7,341
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;64&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>DONLEY</th>
+													
+													<td>
+														2,322
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														10
+													</td>
+													<td>10</td>
+													<td>0.43%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;65&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>DUVAL</th>
+													
+													<td>
+														8,346
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;66&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>EASTLAND</th>
+													
+													<td>
+														12,230
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														4
+													</td>
+													<td>4</td>
+													<td>0.03%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;67&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>ECTOR</th>
+													
+													<td>
+														80,872
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														549
+													</td>
+													<td>549</td>
+													<td>0.68%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;68&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>EDWARDS</th>
+													
+													<td>
+														1,499
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;69&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>ELLIS</th>
+													
+													<td>
+														120,188
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														36
+													</td>
+													<td>36</td>
+													<td>0.03%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;70&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>EL PASO</th>
+													
+													<td>
+														488,470
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														5,843
+													</td>
+													<td>5,843</td>
+													<td>1.2%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;71&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>ERATH</th>
+													
+													<td>
+														23,935
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														9
+													</td>
+													<td>9</td>
+													<td>0.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;72&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>FALLS</th>
+													
+													<td>
+														10,361
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;73&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>FANNIN</th>
+													
+													<td>
+														22,199
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														240
+													</td>
+													<td>240</td>
+													<td>1.08%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;74&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>FAYETTE</th>
+													
+													<td>
+														17,398
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														145
+													</td>
+													<td>145</td>
+													<td>0.83%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;75&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>FISHER</th>
+													
+													<td>
+														2,646
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														48
+													</td>
+													<td>48</td>
+													<td>1.81%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;76&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>FLOYD</th>
+													
+													<td>
+														3,850
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1
+													</td>
+													<td>1</td>
+													<td>0.03%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;77&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>FOARD</th>
+													
+													<td>
+														884
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;78&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>FORT BEND</th>
+													
+													<td>
+														482,368
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														171
+													</td>
+													<td>171</td>
+													<td>0.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;79&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>FRANKLIN</th>
+													
+													<td>
+														7,061
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														117
+													</td>
+													<td>117</td>
+													<td>1.66%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;80&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>FREESTONE</th>
+													
+													<td>
+														12,481
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														130
+													</td>
+													<td>130</td>
+													<td>1.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;81&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>FRIO</th>
+													
+													<td>
+														8,984
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														4
+													</td>
+													<td>4</td>
+													<td>0.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;82&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>GAINES</th>
+													
+													<td>
+														9,701
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														2
+													</td>
+													<td>2</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;83&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>GALVESTON</th>
+													
+													<td>
+														228,482
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														2,869
+													</td>
+													<td>2,869</td>
+													<td>1.26%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;84&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>GARZA</th>
+													
+													<td>
+														2,681
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;85&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>GILLESPIE</th>
+													
+													<td>
+														20,404
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														19
+													</td>
+													<td>19</td>
+													<td>0.09%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;86&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>GLASSCOCK</th>
+													
+													<td>
+														800
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														18
+													</td>
+													<td>18</td>
+													<td>2.25%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;87&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>GOLIAD</th>
+													
+													<td>
+														5,766
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;88&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>GONZALES</th>
+													
+													<td>
+														12,629
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;89&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>GRAY</th>
+													
+													<td>
+														12,406
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														2
+													</td>
+													<td>2</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;90&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>GRAYSON</th>
+													
+													<td>
+														86,740
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														19
+													</td>
+													<td>19</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;91&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>GREGG</th>
+													
+													<td>
+														72,867
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1,424
+													</td>
+													<td>1,424</td>
+													<td>1.95%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;92&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>GRIMES</th>
+													
+													<td>
+														17,877
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1
+													</td>
+													<td>1</td>
+													<td>0.01%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;93&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>GUADALUPE</th>
+													
+													<td>
+														111,142
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														2,181
+													</td>
+													<td>2,181</td>
+													<td>1.96%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;94&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HALE</th>
+													
+													<td>
+														18,997
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;95&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HALL</th>
+													
+													<td>
+														1,926
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1
+													</td>
+													<td>1</td>
+													<td>0.05%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;96&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HAMILTON</th>
+													
+													<td>
+														5,832
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;97&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HANSFORD</th>
+													
+													<td>
+														3,009
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;98&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HARDEMAN</th>
+													
+													<td>
+														2,486
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;99&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HARDIN</th>
+													
+													<td>
+														39,952
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														4
+													</td>
+													<td>4</td>
+													<td>0.01%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;100&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HARRIS</th>
+													
+													<td>
+														2,480,522
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1,337
+													</td>
+													<td>1,337</td>
+													<td>0.05%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;101&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HARRISON</th>
+													
+													<td>
+														45,933
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														10
+													</td>
+													<td>10</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;102&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HARTLEY</th>
+													
+													<td>
+														2,909
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														47
+													</td>
+													<td>47</td>
+													<td>1.62%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;103&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HASKELL</th>
+													
+													<td>
+														3,377
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														62
+													</td>
+													<td>62</td>
+													<td>1.84%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;104&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HAYS</th>
+													
+													<td>
+														152,840
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														2,942
+													</td>
+													<td>2,942</td>
+													<td>1.92%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;105&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HEMPHILL</th>
+													
+													<td>
+														2,355
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;106&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HENDERSON</th>
+													
+													<td>
+														54,663
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1,495
+													</td>
+													<td>1,495</td>
+													<td>2.73%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;107&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HIDALGO</th>
+													
+													<td>
+														391,309
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														22
+													</td>
+													<td>22</td>
+													<td>0.01%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;108&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HILL</th>
+													
+													<td>
+														23,625
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														5
+													</td>
+													<td>5</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;109&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HOCKLEY</th>
+													
+													<td>
+														13,781
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														2
+													</td>
+													<td>2</td>
+													<td>0.01%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;110&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HOOD</th>
+													
+													<td>
+														44,831
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														17
+													</td>
+													<td>17</td>
+													<td>0.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;111&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HOPKINS</th>
+													
+													<td>
+														23,954
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;112&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HOUSTON</th>
+													
+													<td>
+														13,444
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														174
+													</td>
+													<td>174</td>
+													<td>1.29%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;113&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HOWARD</th>
+													
+													<td>
+														17,526
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														4
+													</td>
+													<td>4</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;114&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HUDSPETH</th>
+													
+													<td>
+														2,085
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;115&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HUNT</th>
+													
+													<td>
+														59,367
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														24
+													</td>
+													<td>24</td>
+													<td>0.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;116&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>HUTCHINSON</th>
+													
+													<td>
+														13,533
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														178
+													</td>
+													<td>178</td>
+													<td>1.32%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;117&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>IRION</th>
+													
+													<td>
+														1,298
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														10
+													</td>
+													<td>10</td>
+													<td>0.77%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;118&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>JACK</th>
+													
+													<td>
+														5,254
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														69
+													</td>
+													<td>69</td>
+													<td>1.31%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;119&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>JACKSON</th>
+													
+													<td>
+														9,482
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1
+													</td>
+													<td>1</td>
+													<td>0.01%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;120&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>JASPER</th>
+													
+													<td>
+														23,374
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														5
+													</td>
+													<td>5</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;121&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>JEFF DAVIS</th>
+													
+													<td>
+														1,670
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														2
+													</td>
+													<td>2</td>
+													<td>0.12%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;122&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>JEFFERSON</th>
+													
+													<td>
+														149,372
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														21
+													</td>
+													<td>21</td>
+													<td>0.01%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;123&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>JIM HOGG</th>
+													
+													<td>
+														3,800
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;124&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>JIM WELLS</th>
+													
+													<td>
+														26,636
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;125&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>JOHNSON</th>
+													
+													<td>
+														105,574
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														40
+													</td>
+													<td>40</td>
+													<td>0.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;126&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>JONES</th>
+													
+													<td>
+														9,635
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														78
+													</td>
+													<td>78</td>
+													<td>0.81%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;127&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>KARNES</th>
+													
+													<td>
+														8,359
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;128&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>KAUFMAN</th>
+													
+													<td>
+														81,901
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														9
+													</td>
+													<td>9</td>
+													<td>0.01%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;129&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>KENDALL</th>
+													
+													<td>
+														33,836
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														28
+													</td>
+													<td>28</td>
+													<td>0.08%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;130&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>KENEDY</th>
+													
+													<td>
+														296
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;131&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>KENT</th>
+													
+													<td>
+														592
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														6
+													</td>
+													<td>6</td>
+													<td>1.01%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;132&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>KERR</th>
+													
+													<td>
+														37,726
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														28
+													</td>
+													<td>28</td>
+													<td>0.07%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;133&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>KIMBLE</th>
+													
+													<td>
+														3,113
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														39
+													</td>
+													<td>39</td>
+													<td>1.25%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;134&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>KING</th>
+													
+													<td>
+														183
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;135&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>KINNEY</th>
+													
+													<td>
+														2,270
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;136&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>KLEBERG</th>
+													
+													<td>
+														18,749
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														419
+													</td>
+													<td>419</td>
+													<td>2.23%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;137&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>KNOX</th>
+													
+													<td>
+														2,391
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;138&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>LAMAR</th>
+													
+													<td>
+														32,390
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;139&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>LAMB</th>
+													
+													<td>
+														8,085
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;140&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>LAMPASAS</th>
+													
+													<td>
+														15,424
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														16
+													</td>
+													<td>16</td>
+													<td>0.1%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;141&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>LASALLE</th>
+													
+													<td>
+														4,426
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														10
+													</td>
+													<td>10</td>
+													<td>0.23%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;142&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>LAVACA</th>
+													
+													<td>
+														13,661
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														3
+													</td>
+													<td>3</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;143&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>LEE</th>
+													
+													<td>
+														11,145
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														29
+													</td>
+													<td>29</td>
+													<td>0.26%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;144&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>LEON</th>
+													
+													<td>
+														11,727
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														269
+													</td>
+													<td>269</td>
+													<td>2.29%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;145&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>LIBERTY</th>
+													
+													<td>
+														46,155
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														6
+													</td>
+													<td>6</td>
+													<td>0.01%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;146&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>LIMESTONE</th>
+													
+													<td>
+														13,963
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														197
+													</td>
+													<td>197</td>
+													<td>1.41%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;147&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>LIPSCOMB</th>
+													
+													<td>
+														1,977
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														2
+													</td>
+													<td>2</td>
+													<td>0.1%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;148&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>LIVE OAK</th>
+													
+													<td>
+														7,572
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;149&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>LLANO</th>
+													
+													<td>
+														16,688
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														16
+													</td>
+													<td>16</td>
+													<td>0.1%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;150&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>LOVING</th>
+													
+													<td>
+														111
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;151&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>LUBBOCK</th>
+													
+													<td>
+														183,320
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														89
+													</td>
+													<td>89</td>
+													<td>0.05%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;152&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>LYNN</th>
+													
+													<td>
+														4,028
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;153&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MADISON</th>
+													
+													<td>
+														7,822
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														105
+													</td>
+													<td>105</td>
+													<td>1.34%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;154&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MARION</th>
+													
+													<td>
+														7,596
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1
+													</td>
+													<td>1</td>
+													<td>0.01%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;155&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MARTIN</th>
+													
+													<td>
+														3,467
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														6
+													</td>
+													<td>6</td>
+													<td>0.17%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;156&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MASON</th>
+													
+													<td>
+														3,168
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														6
+													</td>
+													<td>6</td>
+													<td>0.19%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;157&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MATAGORDA</th>
+													
+													<td>
+														22,026
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														6
+													</td>
+													<td>6</td>
+													<td>0.03%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;158&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MAVERICK</th>
+													
+													<td>
+														33,050
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														109
+													</td>
+													<td>109</td>
+													<td>0.33%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;159&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MCCULLOCH</th>
+													
+													<td>
+														5,361
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1
+													</td>
+													<td>1</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;160&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MCLENNAN</th>
+													
+													<td>
+														149,461
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														3,991
+													</td>
+													<td>3,991</td>
+													<td>2.67%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;161&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MCMULLEN</th>
+													
+													<td>
+														706
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;162&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MEDINA</th>
+													
+													<td>
+														33,763
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														24
+													</td>
+													<td>24</td>
+													<td>0.07%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;163&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MENARD</th>
+													
+													<td>
+														1,469
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;164&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MIDLAND</th>
+													
+													<td>
+														90,392
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														30
+													</td>
+													<td>30</td>
+													<td>0.03%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;165&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MILAM</th>
+													
+													<td>
+														15,838
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														88
+													</td>
+													<td>88</td>
+													<td>0.56%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;166&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MILLS</th>
+													
+													<td>
+														3,429
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1
+													</td>
+													<td>1</td>
+													<td>0.03%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;167&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MITCHELL</th>
+													
+													<td>
+														4,524
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														48
+													</td>
+													<td>48</td>
+													<td>1.06%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;168&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MONTAGUE</th>
+													
+													<td>
+														14,001
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;169&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MONTGOMERY</th>
+													
+													<td>
+														370,060
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1,612
+													</td>
+													<td>1,612</td>
+													<td>0.44%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;170&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MOORE</th>
+													
+													<td>
+														9,995
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														2
+													</td>
+													<td>2</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;171&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MORRIS</th>
+													
+													<td>
+														8,583
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;172&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>MOTLEY</th>
+													
+													<td>
+														859
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;173&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>NACOGDOCHES</th>
+													
+													<td>
+														38,786
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														32
+													</td>
+													<td>32</td>
+													<td>0.08%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;174&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>NAVARRO</th>
+													
+													<td>
+														29,959
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														6
+													</td>
+													<td>6</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;175&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>NEWTON</th>
+													
+													<td>
+														9,400
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;176&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>NOLAN</th>
+													
+													<td>
+														8,871
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														169
+													</td>
+													<td>169</td>
+													<td>1.91%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;177&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>NUECES</th>
+													
+													<td>
+														211,652
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														88
+													</td>
+													<td>88</td>
+													<td>0.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;178&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>OCHILTREE</th>
+													
+													<td>
+														5,192
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														47
+													</td>
+													<td>47</td>
+													<td>0.91%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;179&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>OLDHAM</th>
+													
+													<td>
+														1,425
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;180&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>ORANGE</th>
+													
+													<td>
+														54,442
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														13
+													</td>
+													<td>13</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;181&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>PALO PINTO</th>
+													
+													<td>
+														18,946
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														15
+													</td>
+													<td>15</td>
+													<td>0.08%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;182&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>PANOLA</th>
+													
+													<td>
+														16,808
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														29
+													</td>
+													<td>29</td>
+													<td>0.17%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;183&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>PARKER</th>
+													
+													<td>
+														103,999
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														48
+													</td>
+													<td>48</td>
+													<td>0.05%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;184&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>PARMER</th>
+													
+													<td>
+														4,537
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														2
+													</td>
+													<td>2</td>
+													<td>0.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;185&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>PECOS</th>
+													
+													<td>
+														8,323
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1
+													</td>
+													<td>1</td>
+													<td>0.01%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;186&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>POLK</th>
+													
+													<td>
+														40,520
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														25
+													</td>
+													<td>25</td>
+													<td>0.06%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;187&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>POTTER</th>
+													
+													<td>
+														57,736
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														18
+													</td>
+													<td>18</td>
+													<td>0.03%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;188&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>PRESIDIO</th>
+													
+													<td>
+														4,789
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;189&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>RAINS</th>
+													
+													<td>
+														8,320
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;190&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>RANDALL</th>
+													
+													<td>
+														93,313
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														499
+													</td>
+													<td>499</td>
+													<td>0.53%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;191&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>REAGAN</th>
+													
+													<td>
+														1,879
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;192&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>REAL</th>
+													
+													<td>
+														2,702
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;193&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>RED RIVER</th>
+													
+													<td>
+														8,489
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1
+													</td>
+													<td>1</td>
+													<td>0.01%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;194&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>REEVES</th>
+													
+													<td>
+														7,558
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;195&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>REFUGIO</th>
+													
+													<td>
+														5,007
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;196&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>ROBERTS</th>
+													
+													<td>
+														680
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														11
+													</td>
+													<td>11</td>
+													<td>1.62%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;197&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>ROBERTSON</th>
+													
+													<td>
+														11,844
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														51
+													</td>
+													<td>51</td>
+													<td>0.43%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;198&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>ROCKWALL</th>
+													
+													<td>
+														71,102
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														27
+													</td>
+													<td>27</td>
+													<td>0.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;199&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>RUNNELS</th>
+													
+													<td>
+														7,025
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;200&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>RUSK</th>
+													
+													<td>
+														32,388
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														4
+													</td>
+													<td>4</td>
+													<td>0.01%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;201&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>SABINE</th>
+													
+													<td>
+														8,050
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														100
+													</td>
+													<td>100</td>
+													<td>1.24%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;202&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>SAN AUGUSTINE</th>
+													
+													<td>
+														6,108
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;203&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>SAN JACINTO</th>
+													
+													<td>
+														18,969
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														10
+													</td>
+													<td>10</td>
+													<td>0.05%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;204&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>SAN PATRICIO</th>
+													
+													<td>
+														43,248
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														14
+													</td>
+													<td>14</td>
+													<td>0.03%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;205&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>SAN SABA</th>
+													
+													<td>
+														3,776
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;206&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>SCHLEICHER</th>
+													
+													<td>
+														1,709
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														30
+													</td>
+													<td>30</td>
+													<td>1.76%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;207&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>SCURRY</th>
+													
+													<td>
+														9,489
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														3
+													</td>
+													<td>3</td>
+													<td>0.03%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;208&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>SHACKELFORD</th>
+													
+													<td>
+														2,320
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														34
+													</td>
+													<td>34</td>
+													<td>1.47%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;209&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>SHELBY</th>
+													
+													<td>
+														15,570
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1
+													</td>
+													<td>1</td>
+													<td>0.01%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;210&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>SHERMAN</th>
+													
+													<td>
+														1,520
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;211&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>SMITH</th>
+													
+													<td>
+														146,149
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														29
+													</td>
+													<td>29</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;212&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>SOMERVELL</th>
+													
+													<td>
+														6,712
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														3
+													</td>
+													<td>3</td>
+													<td>0.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;213&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>STARR</th>
+													
+													<td>
+														34,050
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														16
+													</td>
+													<td>16</td>
+													<td>0.05%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;214&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>STEPHENS</th>
+													
+													<td>
+														5,672
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;215&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>STERLING</th>
+													
+													<td>
+														939
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;216&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>STONEWALL</th>
+													
+													<td>
+														953
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;217&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>SUTTON</th>
+													
+													<td>
+														2,449
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;218&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>SWISHER</th>
+													
+													<td>
+														3,941
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														3
+													</td>
+													<td>3</td>
+													<td>0.08%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;219&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>TARRANT</th>
+													
+													<td>
+														1,212,524
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														9,543
+													</td>
+													<td>9,543</td>
+													<td>0.79%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;220&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>TAYLOR</th>
+													
+													<td>
+														83,696
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1,322
+													</td>
+													<td>1,322</td>
+													<td>1.58%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;221&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>TERRELL</th>
+													
+													<td>
+														673
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1
+													</td>
+													<td>1</td>
+													<td>0.15%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;222&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>TERRY</th>
+													
+													<td>
+														6,589
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;223&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>THROCKMORTON</th>
+													
+													<td>
+														1,216
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1
+													</td>
+													<td>1</td>
+													<td>0.08%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;224&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>TITUS</th>
+													
+													<td>
+														17,666
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														3
+													</td>
+													<td>3</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;225&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>TOM GREEN</th>
+													
+													<td>
+														70,086
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1,985
+													</td>
+													<td>1,985</td>
+													<td>2.83%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;226&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>TRAVIS</th>
+													
+													<td>
+														854,577
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														1,980
+													</td>
+													<td>1,980</td>
+													<td>0.23%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;227&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>TRINITY</th>
+													
+													<td>
+														11,541
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;228&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>TYLER</th>
+													
+													<td>
+														14,556
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														3
+													</td>
+													<td>3</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;229&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>UPSHUR</th>
+													
+													<td>
+														28,619
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														363
+													</td>
+													<td>363</td>
+													<td>1.27%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;230&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>UPTON</th>
+													
+													<td>
+														2,207
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														6
+													</td>
+													<td>6</td>
+													<td>0.27%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;231&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>UVALDE</th>
+													
+													<td>
+														17,420
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														4
+													</td>
+													<td>4</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;232&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>VAL VERDE</th>
+													
+													<td>
+														28,927
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														13
+													</td>
+													<td>13</td>
+													<td>0.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;233&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>VAN ZANDT</th>
+													
+													<td>
+														38,965
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														9
+													</td>
+													<td>9</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;234&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>VICTORIA</th>
+													
+													<td>
+														56,612
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														24
+													</td>
+													<td>24</td>
+													<td>0.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;235&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>WALKER</th>
+													
+													<td>
+														35,038
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														10
+													</td>
+													<td>10</td>
+													<td>0.03%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;236&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>WALLER</th>
+													
+													<td>
+														35,116
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;237&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>WARD</th>
+													
+													<td>
+														6,880
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;238&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>WASHINGTON</th>
+													
+													<td>
+														23,947
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														11
+													</td>
+													<td>11</td>
+													<td>0.05%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;239&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>WEBB</th>
+													
+													<td>
+														137,840
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;240&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>WHARTON</th>
+													
+													<td>
+														25,697
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														9
+													</td>
+													<td>9</td>
+													<td>0.04%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;241&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>WHEELER</th>
+													
+													<td>
+														3,514
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														2
+													</td>
+													<td>2</td>
+													<td>0.06%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;242&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>WICHITA</th>
+													
+													<td>
+														83,575
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														3
+													</td>
+													<td>3</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;243&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>WILBARGER</th>
+													
+													<td>
+														8,196
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														235
+													</td>
+													<td>235</td>
+													<td>2.87%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;244&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>WILLACY</th>
+													
+													<td>
+														12,804
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														15
+													</td>
+													<td>15</td>
+													<td>0.12%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;245&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>WILLIAMSON</th>
+													
+													<td>
+														376,672
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														185
+													</td>
+													<td>185</td>
+													<td>0.05%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;246&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>WILSON</th>
+													
+													<td>
+														35,036
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														295
+													</td>
+													<td>295</td>
+													<td>0.84%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;247&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>WINKLER</th>
+													
+													<td>
+														4,013
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;248&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>WISE</th>
+													
+													<td>
+														45,643
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														11
+													</td>
+													<td>11</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;249&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>WOOD</th>
+													
+													<td>
+														32,382
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														6
+													</td>
+													<td>6</td>
+													<td>0.02%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;250&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>YOAKUM</th>
+													
+													<td>
+														4,407
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														2
+													</td>
+													<td>2</td>
+													<td>0.05%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;251&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>YOUNG</th>
+													
+													<td>
+														11,769
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														3
+													</td>
+													<td>3</td>
+													<td>0.03%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;252&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>ZAPATA</th>
+													
+													<td>
+														8,257
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;253&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+												<tr>
+													<th>ZAVALA</th>
+													
+													<td>
+														8,066
+													</td>
+													<td>
+														0
+													</td>
+													<td>
+														0
+													</td>
+													<td>0.0%</td>
+													<td>
+														0
+													</td>
+													<td>0</td>
+													<td>0.0%</td>
+													<td nowrap="">
+														
+															<a href="javascript:void(0);" onclick="downloadReport(&#39;254&#39;);" style="color: red;">
+																Click Here
+															</a>
+														
+													</td>
+												</tr>
+											
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="col-lg-12  col-sm-12 text-center my-2">
+								<button type="button" class="btn-primary btn btn-sm mt-1" onclick="return previousElectionsDatesScreen();">Previous</button>
+								<button type="button" class="btn-primary btn btn-sm mt-1" onclick="downloadReport(&#39;&#39;);">Generate Statewide Report</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<input type="hidden" name="idElection" id="idElection" value="44144"> 
+				<input type="hidden" name="selectedDate" id="selectedDate" value="2020-10-04 00:00:00.0"> 
+				<input type="hidden" name="idTown" id="idTown" value=""> 
+			</form>
+		</div>
+		
+
+
+
+
+
+
+
+ <footer>
+ <div id="lower-container">
+			<div id="lower-div">
+			  
+			<div id="lower-nav-col-1">
+				  <ul>
+					<li><a href="https://www.sos.texas.gov/corp/sosda/index.shtml">SOSDirect -Business Filings</a></li>
+					<li><a href="https://www.sos.texas.gov/corp/filingandothergeneralfaqs.shtml#CC">Business Copies and Certificates</a></li>
+					<li><a href="https://www.sos.texas.gov/ucc/index.shtml">Uniform Commercial Code</a></li>
+					<li><a href="https://www.sos.texas.gov/corp/texas-businesses-against-trafficking.shtml">Texas Businesses Against Trafficking</a></li>
+					<li><a href="http://www.texas.gov/">Texas.gov </a></li>
+				  </ul>
+			</div>
+				
+
+			<div id="lower-nav-col-2">
+			<ul>
+				  <li><a href="https://www.votetexas.gov/">VoteTexas.gov - Voter Information</a></li>
+				  <li><a href="https://www.votetexas.gov/register-to-vote/where-to-get-an-application-2.html">Register to Vote</a> <strong>&amp;</strong>  <a href="https://www.votetexas.gov/register-to-vote/need-id.html">Voter I.D. </a></li>
+				  <li><a href="https://www.sos.texas.gov/policies.shtml">Website Policies</a></li>
+				  <li><a href="https://www.sos.texas.gov/records.shtml">Open Records</a></li>
+				  <li><a href="https://www.sos.texas.gov/contact.shtml">Contacts</a></li>
+				</ul>
+			</div>
+
+				
+			<div id="lower-nav-col-3">
+				<ul>
+					<li><a href="https://www.tsl.texas.gov/trail/index.html">Statewide Search</a></li>
+					<li><a href="http://www.texashomelandsecurity.com/">Texas Homeland Security</a></li>
+					<li><a href="https://comptroller.texas.gov/transparency/spending/">Where the Money Goes</a></li>
+					<li><a href="https://sao.fraud.texas.gov/ReportFraud/">Fraud Reporting</a></li>
+					<li><a href="http://veterans.portal.texas.gov/">Texas Veterans Portal</a></li>
+				</ul>
+			</div>	
+			  
+				</div>
+				
+			<div id="sub-footer">
+			  
+				<a href="https://www.facebook.com/txsecretary">
+					<img src="./Oct_04_files/facebook-blue.png" width="31" height="31" alt="Facebook"></a>&nbsp;<a href="https://www.instagram.com/texassecretary/">
+					<img src="./Oct_04_files/instagram-blue.png" width="31" height="31" alt="Instragram"></a>&nbsp; <a href="https://twitter.com/TXsecofstate">
+					<img src="./Oct_04_files/twitter-blue.png" width="31" height="31" alt="Twitter"></a>&nbsp;<a href="https://www.youtube.com/channel/UC7NJ9yjB4K-1MOMFzH6hAbQ/videos">
+					<img src="./Oct_04_files/youtube-blue.png" width="31" height="31" alt="YouTube"></a>&nbsp;<a href="https://earlyvoting.texas-election.com/rss/index.shtml">
+					<img src="./Oct_04_files/rss-blue.png" width="31" height="31" alt="RSS Feed"></a>&nbsp;<a href="https://public.govdelivery.com/accounts/TXSOS/subscriber/new?qsp=TXSOS_1">
+					<img src="./Oct_04_files/mail-blue.png" width="31" height="31" alt="Receive email updates"></a>
+
+
+				
+			</div>
+		</div>
+                
+            </footer>
+
+
+
+
+
+	</section>
+	</main>
+	<script src="./Oct_04_files/jquery-3.3.1.min.js"></script>
+	<script src="./Oct_04_files/popper.min.js"></script>
+	<script src="./Oct_04_files/bootstrap.min.js"></script>
+	<script src="./Oct_04_files/custom.js"></script>
+
+</body></html>

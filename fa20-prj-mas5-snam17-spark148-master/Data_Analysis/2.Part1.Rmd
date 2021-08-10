@@ -1,0 +1,119 @@
+### 2020 Cumulative Early Vote Percentage By Day
+
+```{r, include=FALSE}
+#Import Library and Data
+library(choroplethr)
+library(choroplethrMaps)
+library(tidyverse)
+library(usmap)
+library(gridExtra)
+library(grid)
+library(dplyr)
+library(ggplot2)
+
+evdbd <- read_csv("../Data_Wrangling/Final_data/1.Early_Vote_Data_By_Day.csv")
+#evdbd <- evdbd %>% arrange(County) %>% filter(Year==2020)
+evdbd[which(evdbd$County == "Lasalle"),2] <- "La Salle"
+evdbd$region <- as.numeric(fips("TX", unlist(evdbd %>% select("County"))))
+total_vote <- sum(evdbd$In_person) + sum(evdbd$Mail)
+evdbd <- evdbd %>% group_by(date) %>% summarise(Total = sum(In_person) + sum(Mail), Totalpec = Total/total_vote)
+cumulative_pec <- round(cumsum(evdbd$Totalpec), 3)
+evdbd_cs <- cbind(evdbd, cumulative_pec)
+```
+
+
+```{r, echo=FALSE}
+ggplot(data = evdbd_cs ) +
+  geom_bar(aes(x = `date`, y = `cumulative_pec`, fill = cumulative_pec),stat="identity") + labs(title = "2020 Cumulative Early Vote % By Day", x = "Date", y = "Cumulative Early Vote %")
+```
+
+When looking at the state's cumulative early votes by day, we see an surge in early voting on October 13th, the first day of early voting. The limited votes before then represent early mail in votes.
+
+
+***Note: The R-Shiny Application can take up to 3 min to be fully loaded.***
+
+<iframe src="https://spark148.shinyapps.io/12020_early_vote/" width="900" height="640" style="border: none;"></iframe>
+
+
+Since there was a ton of media coverage regarding the early vote in Texas, we decided that it would be helpful to show the cumulative percentage of non-suspended voters that voted each day with an R-Shiny application.
+
+## Part 3: Showing the Swing Counties in 2018
+
+
+```{r, include=FALSE, message=FALSE, warning=FALSE}
+highlight_county = function(county_fips){
+  data(county.map, package="choroplethrMaps", envir=environment())
+  df = county.map[county.map$region %in% county_fips, ]
+  geom_polygon(data=df, aes(long, lat, group = group), color = "yellow", fill = NA, size = 1)
+}
+#Highlight county function implementation based off https://arilamstein.com/blog/2016/03/21/mapping-election-results-r-choroplethr/
+dat <- read_csv("../Data_Wrangling/Final_data/1.Early_Vote_Data.csv")
+dat <- dat %>% arrange(County) %>% filter(Year==2020)
+dat[which(dat$County == "Lasalle"),1] <- "La Salle"
+dat$region <- as.numeric(fips("TX", unlist(dat %>% select("County"))))
+
+dat_2018 <- read_csv("../Data_Wrangling/Final_data/4.2018_Election_Data.csv")
+dat_2018 <- dat_2018[-c(1,256),] %>% arrange(Race,County)
+dat_2018[which(dat_2018$County == "LASALLE"),1] <- "La Salle"
+dat_2018$region <- as.numeric(fips("TX", unlist(dat_2018 %>% select("County"))))
+dat_2018 <- dat_2018 %>% mutate("value" = ifelse(REP>DEM,"REP","DEM")) #if REP won then 0
+```
+
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE}
+governor <- dat_2018 %>% filter(Race=="Governor") %>% select("region","value")
+senator <- dat_2018 %>% filter(Race=="Senator") %>% select("region","value")
+highlight_region <- governor$region[which(!governor$value == senator$value)]
+plt1 <- county_choropleth(governor,state_zoom = "texas", num_colors=2,legend="Percentage",title="Result of 2018 Governor Election") + highlight_county(highlight_region) + scale_fill_manual(name="Won",values=c("blue","red"))
+
+plt2 <- county_choropleth(senator,state_zoom = "texas", num_colors=2,legend="Percentage",title="Result of 2018 Senator Election") + scale_fill_manual(name="Won",values=c("blue","red"))+ highlight_county(highlight_region)
+grid.arrange(plt1,plt2,ncol=2, bottom = textGrob("Result of 2018 Election",gp=gpar(fontsize=15)))
+```
+
+We hoped to find patterns in Texas's early vote to forecast the 2020 presidential election. To first understand the voting habits of Texans, we observed the 2018 Governor and Senate election. We were surprised to discover 12 counties that had voted Republican for the Governor election, but Democrat for the Senator Election. The governor and senate election took place on the same day, and it was odd that a voter would select a candidate from the opposite party for the specific election. We designated these 12 counties as "swing" counties as searched for patterns within these 12 counties to see if these counties had any special characteristics.
+
+
+
+### Total 2020 Early Vote in 2018 Swing Counties
+
+```{r, include=FALSE}
+sub_dat <- dat %>% mutate("value"= (Cumulative_In_Person+Cumulative_By_Mail)*100/Non_Suspense_Voters) %>% select(13,14)
+plt1 <- county_choropleth(sub_dat,state_zoom = "texas", num_colors=1,legend="Percentage",title="By Percentage") + highlight_county(highlight_region) 
+sub_dat2 <- sub_dat %>% mutate(value=rank(value,"first")) %>%arrange(-sub_dat$value)
+plt2 <- county_choropleth(sub_dat2,state_zoom = "texas", num_colors=1,title="By Rank",legend="Rank ") + highlight_county(highlight_region) 
+grid.arrange(plt1,plt2,ncol=2, bottom = textGrob("Result of 2020 Early Vote (Total)",gp=gpar(fontsize=15)))
+
+sub_dat <- dat %>% mutate("value"=(Cumulative_In_Person+Cumulative_By_Mail)*100/Non_Suspense_Voters) %>% select("County", 13,14)
+sub_dat <- sub_dat[sub_dat$region %in% highlight_region,]
+sub_dat %>% arrange(desc(-value))
+
+```
+
+
+```{r, echo=FALSE}
+
+colnames(sub_dat) <- c("County", "region", "Cumulative Early Vote %")
+
+ggplot(sub_dat, aes(x = County, y = `Cumulative Early Vote %`)) + geom_bar(stat = "identity", fill = "lightblue") +
+  geom_text(aes(label=round(`Cumulative Early Vote %`, 2), vjust = 1.1), color = "black",  size = 3)+
+  scale_x_discrete(guide = guide_axis(n.dodge=3))+ labs(title = "Early Votes for Swing Counties")
+
+sub_dat2 <- dat %>% mutate("value"=(Cumulative_In_Person+Cumulative_By_Mail)*100/Non_Suspense_Voters) %>% select("County", 13,14)
+
+sub_dat3 <- sub_dat2 %>% mutate(value=rank(value,"first")) %>%arrange(sub_dat2$value)
+sub_dat3 <- sub_dat3[sub_dat3$region %in% highlight_region,]
+colnames(sub_dat3) <- c("County", "region", "Value")
+
+ggplot(sub_dat3, aes(x = County, y = `Value`)) + geom_bar(stat = "identity", fill = "lightblue") +
+  geom_text(aes(label=round(`Value`, 2), vjust = 1.1), color = "black", size = 3)+
+  scale_x_discrete(guide = guide_axis(n.dodge=3) )+ labs(title = "Ranks For Swing Counties")
+
+```
+
+
+Ultimately, there was nothing notable about the early vote characteristics of these swing counties from 2018 in 2020. Some of these counties were among the highest in the Texas for early turnout, some were in the middle, and some were closer to the lowest counties. (Note: there are 254 counties so a rank of 254 represents the highest total percent of early vote by non-suspended voters of any county in the state)
+
+Although these counties were swing counties in 2018, they are probably not relevant to 2020. As in 2018, the Democrat who ran in the Senate election *still lost the state*. Therefore, if a Democrat would have won in 2020, almost all of these counties would likely be Democratic. We thought that there had to be a better way to group the counties.
+
+We will now look at a different way of grouping the counties using the Whole Foods groupings.
+

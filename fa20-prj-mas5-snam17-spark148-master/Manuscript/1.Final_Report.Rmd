@@ -1,0 +1,256 @@
+---
+title: Analyzing Texas Election Data Available Before the 2020 U.S. Presidential Election
+author: "Suyoung Park (spark148), Matthew Schroeder (mas5), Erik Nam (snam17)"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Abstract
+
+Our team investigated election data related to the state of Texas. The state is the country’s second largest electoral prize, with its 38 electoral votes second to only California’s 55 electoral votes. It is trailed by New York and Florida which each have 29 electoral votes.
+
+Typically, there is limited pre-election national media interest in the Texas results, and for good reason. Texas is a consistently Republican state. In fact, the last time Texas voted statewide for a Democrat in the Presidential election was in 1976. Texas does not typically matter in the race to 270 electoral votes, and in turn, the U.S. Presidency.
+
+However, in the 2020 election cycle, some national political media outlets rated the state as a “toss up.” Ultimately Texas remained Republican. In our report, we use historical and early vote data to provide a better picture of why the outlets made this last-minute rating change.
+
+In part, this was due to unprecedented early voter turnout nationally and *particularly* in Texas due to the COVID-19 pandemic. We analyzed the historical early vote data in every year since 1996 to give context to the 2020 early vote. To show how Texas has voted historically, we plotted the difference between Republicans and Democrats in every Presidential election since 1976. 
+
+To give a more recent context about elections in Texas, we analyzed the 2018 midterm elections, the 2018 demographic data which we projected to 2020, and have built an R-Shiny application that shows the early vote by day in each Texas county in 2020. We also investigate whether there was a difference between the counties with Whole Foods Markets and those without, and explain the backstory of the why that's worth analyzing.
+
+## Project Outline
+  - Abstract
+  - Introduction
+  - Data Wrangling
+    - Overview
+    - Texas early vote data
+    - Presidential election data
+    - Demographic data
+    - 2018 general election data
+    - 2020 turnout data
+  - Data Analysis
+    - Overview
+    - Historical Presidential election data
+    - 2020 early vote data via R-Shiny application
+    - Whole Foods vs. non-Whole Foods counties
+    - Predicting the election day turnout
+  - Conclusion
+  - Further research
+  - Team member contributions
+
+## Introduction
+
+Political forecaster Nate Silver’s website FiveThirtyEight titled the article of their final election forecast as, "Biden’s Favored In Our Final Presidential Forecast, But It’s A Fine Line Between A Landslide And A Nail-Biter." This was particularly evident in the state of Texas, which hasn’t gone Democratic in a Presidential election since Jimmy Carter carried the state 44 years ago. Typically the state is not competitive. However, now Vice President elect Kamala Harris’ visit on the last Friday of early voting and the last minute 15 million dollar ad buy split between Texas and Ohio by billionaire and 2020 Democrat Primary candidate Mike Bloomberg suggest that the state was competitive this election cycle.
+
+The unprecedentedly high early voter turnout rates due to the COVID-19 pandemic caused there to be more national media interest in the Texas early vote results than ever before. Not only where there a lot of early voters in Texas due to the state having the second highest population in the union, but also the turnout *rate* in Texas was higher than other states. When looking at the total 2020 total early votes cast as a percentage of the 2016 total turnout, Texas came in second out of all of the states, with 108.3% of the *total 2016 turnout before election day*. In contrast nationally, 73.6% of the total 2016 vote was cast before election day. This is not a perfect statistic of course, as perhaps the population of the state of Texas has increased at higher rates compared to that of the general population. But there is no doubt that Texas early vote results were atypical.
+
+This is especially notable as Texas typically has a lower voter turnout in Presidential elections compared to other states. In the 2008, 2012, and 2016 Presidential elections, the state of Texas has been ranked as 47th out of 50 in voting eligible population that comes out to vote. This surge was even cited in Cook Political’s decision to change the race to a tossup. They report, “A huge surge in early vote (as of October 26th, almost half of Texas' registered voters had already cast a ballot) suggests that we could see record turnout in a state that has added many new residents since 2016. That also adds a level of uncertainty to the equation.” In addition to the well respected Cook Political Report, the NBC News Political Unit also moved Texas to the “tossup” column.
+
+Another argument for Texas flipping to the Democrats was related to the correlated polling errors by region in the 2016 Presidential election and the 2018 midterm election and presented by Cook Political Report’s David Wasserman. He shows that in these elections, the midwest and the southeast regions had polling errors favoring the Republicans, while the southwest had polling errors against Republicans. The average error in these two election cycles for the state of Texas was Democrats by 3.4.
+
+Ultimately, Texas remained in the Republican’s column. However, in this report we examine the evidence that was available before election day to understand the argument that Texas was in fact a “toss up.” Before we could conduct further analysis, we needed to import the data, which we review in the next step, data wrangling.
+
+## Data Wrangling
+
+### Overview
+For our analysis, we identified five important data categories: 
+
+1. Early Vote Data in Texas (Historical and 2020 Specific),
+2. Presidential Election data,
+3. Demographic data in Texas,
+4. 2018 General Election (Governor and Senator) data in Texas.
+5. 2020 Election Day Turnout
+
+In total, we collected 48 raw data from different websites with various formats.
+For example, Early Vote and General Election data in Texas were collected from the *Texas Secretary of State*. Since they did not provide the data in .csv format but in table on their website, we built a web scarper to fetch the data from website then populated the database in R using `rvest` and `XML`.
+After gathering, cleaning, and aggregating, we generated 8 datasets and each file and directories were grouped by above *number (from 1 to 5)* by topic. All code, raw data and final data are located in `Data_Wrangling` directory.
+
+### 1. Early Vote Data in Texas (Historical and 2020 Specific)
+This original dataset comes from the table on the *Texas Secretary of State*. We collected two data; Early Vote *by day* in 2020 and aggregated data from 1996 to 2020. Therefore, we parsed 27 webpages (Oct/04/2020 ~ Oct/30/2020) and 7 webpages (1996 ~ 2020) using `rvest` - **to avoid sending multiple queries to the government website, we saved the webpage which you can find in the `Data_Wrangling/Raw_data/1.Early_Vote`**. We populated the database from the html table, then aggregate them. The final output are `Early_Vote_data.csv` and `Early_Vote_data_By_Day.csv`. Additionally, we gathered the information about the voter registration by year from the same website (total 7 files). These datasets were merged with both files to obtain accurate voter information using `left_join()`.
+
+#### 1.1 Early_Vote_data.csv 
+This dataset shows the number of early votes and mail-in votes by year from 1996 to 2020. Additionally, it shows the number of precincts, detail about the registered voters with the number suspense voters and non-suspense voters. Notice that original source only reports top 15 (or less) counties by Registered_Voters from 1996 to 2016. In 2020, we have data for all 254 counties. All together, this dataset contains 338 rows and 12 columns:
+
+- **County**: name of the county
+- **Precints**: number of precincts in the county
+- **Registered_Voters**: total number of registered voters 
+                                   (Suspense_Voters + Non_Suspense_Voters)
+- **Suspense_Voters**: number of voters who are suspended
+- **Non_Suspense_Voters**: number of voters who can actually vote.
+- **Cumulative_In_person**: cumulative number of in-person voter in Year.
+- **Cumulative_In_Person_Percent**: Cumulative_In_person / Non_Suspense_Voters * 100 in Year
+- **Cumulative_By_Mail**: cumulative number of in-person voter in Year.
+- **Cumulative_By_Mail_Percent**: Cumulative_By_Mail / Non_Suspense_Voters * 100 in Year
+- **Cumulative_In_Person_By_Mail**: Cumulative_In_person + Cumulative_By_Mail
+- **Cumulative_Percent_Early_Vote**: Cumulative_In_Person_By_Mail / Non_Suspense_Voters * 100 in Year
+- **Year**: year of the data election.
+
+#### 1.2 Early_Vote_data_By_Day.csv
+This dataset shows the number of early votes by 1) in_person and 2) mail-in from October 4th, 2020 to October 30th, 2020 by County. It contains 6858 rows and 7 columns. We removed the `Registered_Voters` column from original sources and include the `Non_Suspense_Voters` from the registered voters data for accurate and consistent analysis.
+
+- **Date**: date of the data collected
+- **County**: name of the county
+- **Non_Suspense_Voters**: number of voters who can actually vote.
+- **In_person**: number of in-person voter on Date.
+- **In_Person_Percentage**: In_person / Non_Suspense_Voters * 100 on Date
+- **Mail**: number of mail-in voter on Date.
+- **Mail_Percentage**: Mail / Non_Suspense_Voters * 100 on Date
+
+### 2. Presidential Election data
+The original dataset comes from the *Harvard Dataverse*. It contains 3740 rows and 14 columns about the presidential election between 1976 and 2016 by state. We filtered the dataset where the state is Texas, and kept two candidates who received the most votes for each presidential election. we added the `Result` column to indicate winner and runners-up, then dropped the irrelevant columns such as `state_fips`, `state_cen`, `etc`. The final output is `General_Election_Data.csv`.
+
+#### 2.1 General_Election_Data.csv
+This dataset shows the summary of the presidential election in Texas from 1976 to 2016. It contains 22 rows and 6 columns. Each year has two observations that indicate winner and runners-up for the election.
+
+- **Year**: year of the election
+- **Candidate**: name of the candidate
+- **Party**: candidate’s party (democrat or republican)
+- **Candidatevotes**: number of votes the candidate received
+- **Totalvotes**: total number of registered voters
+- **Result**: dummy variable (either winner or runners-up)
+
+### 3. Demographic data in Texas,
+The original dataset comes from the *CENSUS*. It shows the demographic information including age and race in the Texas by county from 2010 to 2019. Specifically, this dataset contains 57912 observations and 80 columns. Since the years we are interested in are 2018 and 2020. We subsetted the data for 2018 and projected the data for 2020. To generate 2020 data, we imposed the assumption that the rates of increasing/decreasing of population between 2018 ~ 2019 and 2019 ~ 2020 are the same. Then we calculate the change of population between 2018 and 2019 for each cell then multiplying to the 2019 data to obtain 2020 data. We dropped 4 age group who is not eligible for the vote (AGEGRP = 4 indicates age 15 to 19 years old in original dataset. Although 18 ~ 19 are eligible for the vote, we exclude them in our analysis because it is hard to estimate the number). The final output are `2018_Demographic_Data_By_County.csv` and `2020_Demographic_Data_By_County.csv` for each age group and `2018_Demographic_Data_By_County_Total.csv` and `2020_Demographic_Data_By_County_Total.csv` for aggregated version. For detail about original dataset, please refer to the Data_Wrangling/Raw_data/3.Demographic/cc-est2019-alldata.pdf. 
+
+#### 3.1 2018_Demographic_Data_By_County.csv / 2020_Demographic_Data_By_County.csv
+This dataset shows the demographic information in the Texas by county by age group in 2018/2020. Each dataset contains 3556 rows and 21 columns. 
+
+- **CTYNAME**: name of the county
+- **AGEGRP**: categorical variable indicating the age
+- **TOT_POP**: Total population (TOT_MALE + TOT_FEMALE **OR** WA_MALE + WA_FEMALE + BA_MALE + BA_FEMALE + IA_MALE + IA_FEMALE + AA_MALE + AA_FEMALE + NA_MALE + NA_FEMALE + TOM_MALE + TOM_FEMALE **OR** NH_MALE + NH_FEMALE + H_MALE + NH_FEMALE)
+-	**TOT_MALE**: Total male population 
+-	**TOT_FEALE**: Total female population
+-	**WA_MALE**: White male population
+-	**WA_FEMALE**: White Female population
+-	**BA_MALE**: Black or African American male population
+-	**BA_FEMALE**: Black or African American female population
+-	**IA_MALE**: American Indian and Alaska Native alone male population
+-	**IA_FEMALE**: American Indian and Alaska Native alone female population
+-	**AA_MALE**: Asian male population
+-	**AA_FEMALE**: Asian female population
+-	**NA_MALE**: Native Hawaiian and Other Pacific Islander alone male population
+-	**NA_FEMALE**: Native Hawaiian and Other Pacific Islander alone female population
+-	**TOM_MALE**: Two or More Races male population
+-	**TOM_FEMALE**: Two or More Races female population
+-	**NH_MALE**: Not Hispanic male population
+-	**NH_FEMALE**: Not Hispanic female population
+-	**H_MALE**: Hispanic male population
+-	**H_FEMALE**: Hispanic female population
+
+#### 3.2 2018_Demographic_Data_By_County_Total.csv / 2020_Demographic_Data_By_County_Total.csv
+This dataset is the aggregated version of 2018_Demographic_Data_By_County.csv and 2020_Demographic_Data_By_County.csv. In particular, this dataset was obtained by summing all data for each AGEGRP except for 1, 2, 3 and 4. Thus, each dataset contains 250 rows and 20 columns. The columns are the same as the files in `3.1` without `AGEGRP` which is the indicator for the age.
+
+### 4. 2018 General Election (Governor and Senator) data in Texas.
+The original dataset was collected from the *Texas Secretary of State*. We gathered the result of governor and senator election in Texas in 2018. Each dataset has county-level data; 254 observations and the 7 variables. We added the indicator for type of race (either Governor or Senator) to merge two dataset. The final output is `2018_Election_Data.csv`.
+
+#### 4.1 2018_Election_Data.csv
+
+This dataset is the combined version of result of the 2018 general election in Texas by county level. It contains 508 (254 * 2) rows and 8 columns. First 254 observations are for Governor election and next 254 observations are for Senator election. Notice that we used the total number of registered voters rather than the number of voters who can actually vote like we did in `Early_Vote` data because 2018 voter registration data is not available.
+
+-	**County**: name of the county
+-	**REP**: total number of votes for Democratic Party
+-	**DEM**: total number of votes for Republican Party
+-	**LIB**: total number of votes for Libertarian Party
+-	**Total_Voters**: total number of votes (REP + DEM + LIB)
+-	**Registered_Voters**: total number of registered voters.
+-	**Turn_out**: Turn out rate (Total_Voters / Registered_Voters * 100)
+-	**Race**: indicator for type of race (either Governor or Senator).
+
+### 5. Election Day Turnout
+
+#### 5.1 2020 Election Day Turnout By County
+
+This data set comes from the Texas Secretary of State as the official number of voters by each precinct on election day. 
+
+-	**COUNTY**: name of the county
+-	**POLL PLACE ID**: the polling place ID
+-	**POLLING PLACE NAME**: the name of the polling place
+-	**VOTES**: the total number of votes cast on election day at the specified polling place
+
+## Data Analysis
+
+### Overview
+
+For our analysis, we identified five key parts: 
+
+1. Understanding the Historical Voting Patterns
+2. Understanding the 2020 Early Vote in Texas
+3. Showing the Swing Counties in '18
+4. Investigating the Whole Foods Counties
+5. Understanding Election Day Turnout
+
+
+## Part 1: Understanding the Historical Voting Patterns
+
+```{r child = '../Data_Analysis/1.EDA.Rmd'}
+```
+
+
+## Part 2: Understanding the 2020 Early Vote in Texas
+
+```{r child = '../Data_Analysis/2.Part1.Rmd'}
+```
+
+## Part 4: Investigating the Whole Foods Counties
+
+```{r child = '../Data_Analysis/3.Part2.Rmd'}
+```
+
+## Part 5: Early Vote vs. Election Day Turnout
+
+```{r child = '../Data_Analysis/4.Part3.Rmd'}
+```
+
+
+## Conclusion
+
+Ultimately, all of the pre-election interest in the state of Texas was not validated with a Democratic win, as the Republicans won the state by 5.6% and for the 11th Presidential election in a row. However, we were able to give some context to why their was such an interest in Texas early vote this election cycle among the national political media. We showed the historical margins for the state and explained how much the voting patterns this year deviated from the historical norms. We also provided an extensive look at how the constituents in the Whole Foods counties and non-Whole Foods counties differ by race, age, and political preferences. Finally, we examined how the early vote and election day turnout were correlated by county.
+
+## Possible Further Research 
+
+The focus of our project was more so on the *turnout* compared to the predicting the margin of the vote, which is the interest of many other political analyses. If a hypothetical group in the Spring 2021 section of STAT 430: Data Science Programming Methods were to continue working on our project, we would suggest that try to explore what variables most impact the Democratic versus Republican margin in each county.
+
+
+## Reference
+
+2020 General Election Early Vote Statistics. (2020, November 23). Retrieved from https://electproject.github.io/Early-Vote-2020G/index.html
+
+Biden's Path to 270 Widens, Trump's Path Narrows, as Texas Moves to Toss Up. (2020, October 28). Retrieved from https://cookpolitical.com/analysis/national/national-politics/bidens-path-270-widens-trumps-path-narrows-texas-moves-toss
+
+Mapping Election Results with R and Choroplethr. (2016, March 21). Retrieved from https://arilamstein.com/blog/2016/03/21/mapping-election-results-r-choroplethr/
+
+Natesilver538. (2020, November 03). Biden's Favored In Our Final Presidential Forecast, But It's A Fine Line Between A Landslide And A Nail-Biter. Retrieved from https://fivethirtyeight.com/features/final-2020-presidential-election-forecast/
+
+Todd, C., Murray, M., Dann, C., &amp; Holzberg, M. (2020, October 27). Biden continues to lead in our latest battleground map. Retrieved from https://www.nbcnews.com/politics/meet-the-press/biden-continues-lead-our-latest-battleground-map-n1244906
+
+Wasserman, D. (2020, November 06). The polls could be wrong. But that may help Biden, not just Trump. Retrieved from https://www.nbcnews.com/politics/2020-election/polls-could-be-wrong-may-help-biden-not-just-trump-n1244753
+
+Texas Secretary of State. Early Vote Data, Registered Voters Data, 2018 General Election and 2020 Election Day Turnout Data. Retrieved from https://earlyvoting.texas-election.com/Elections/getElectionEVDates.do
+
+Voter Turnout Data. Retrieved from http://www.electproject.org/home/voter-turnout/voter-turnout-data
+
+Harvard Dataverse. (2019, June 07). U.S. President Election Data 1976–2016. Retrieved December, from https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi%3A10.7910%2FDVN%2F42MVDX
+
+US Census. (2020, June 22). County Population by Characteristics: 2010-2019. Retrieved December, from https://www.census.gov/data/tables/time-series/demo/popest/2010s-counties-detail.html
+
+## Evaluation of Peers
+
+Suyoung: my responsibilities and contribution include but are not limited to:
+
+1. Team Management: led the group, set up the meeting and communicate channel (email, zoom and slack), created and managed the project timeline.
+
+2. Project Organization: initiated the repository in GitHub, designed the structure of the project with managing the directories and files efficiently and neatly, created and organized the skeleton of the final report and manuscripts.
+
+3. Data Wrangling: developed the whole data wrangling process, searched for the source of the data (CENSUS, Haravrd Dataverse), implemented the web parser, collected the actual data for analysis part from 3 different data sources (Texas Secretary of State, CENSUS, Haravrd Dataverse), investigated and evaluated the usability of the data, cleaned, transformed, and aggregated the datasets with validation. Wrote the whole data wrangling parts in the final reports except for the Turnout part, created the detailed description for the 8 final datasets for teammates.
+
+4. Data Analysis: general debugged the errors in the codes and functions across data analysis parts, enhanced the readability and efficiency of the code in 2.Part1.Rmd, rewrote, improved and published (to embed in the final report) the Shiny App for Result of Early Vote by Day, created 1) Result of 2018 Election plots, 2) Result of 2020 Early Vote (In Person, By Mail and Total) plots, 3) Hispanic vs. Non-Hispanic Populations plot, and 4) Percent of Population by Age Group and County plot in 3.Part2.Rmd.
+
+5. Etc.: recorded and reformatted the presentation video, created the presentation slides in data wrangling part, presented the data wranglign part in the video, attended the additional Prof.'s office hours for sanity check and suggestions to improve the project, created the Reference (APA) in the final report, provided the suggestions and consulted teammates about usage of R, markdown, functions, libraries and relevant features.
+
+Erik built the R-Shiny application, wrote the initial code and visualization for rq1 (Result of 2020 Early Vote by In Person, By Mail and Total, cumulative early vote by county and by day) as well as the analysis, made efforts to help with the data analysis portion and visual graphs when needed, and built prepared the markdown presentation.
+
+Matt located the data sources, wrote the project proposal, the abstract, introduction, conclusion, and conducted a significant portion of the data analysis. I also curated the final powerpoint presentation and was a key communicator in the group. I have invested more effort into this project than any other project as a undergraduate or graduate statistics student at UIUC - and as a result, have learned a ton. I would also like to say that I am happy with both Erik's and Suyoung's efforts to complete this project. I am proud of the virtual hurdles that our group was able to climb.
+
+

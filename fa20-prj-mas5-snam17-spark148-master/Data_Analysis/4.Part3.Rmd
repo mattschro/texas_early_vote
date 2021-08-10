@@ -1,0 +1,95 @@
+---
+output: html_document
+---
+
+```{r importing the data, include=FALSE}
+# Importing the Necessary Datasets for this Question
+Early_Vote_Data <- read.csv("../Data_Wrangling/Final_data/1.Early_Vote_Data.csv")
+#Early_Vote_Data_By_Day <- read.csv("../Data_Wrangling/Final_data/1.Early_Vote_Data_By_Day.csv")
+#Demographic_Data_By_County_2018 <- read.csv("../Data_Wrangling/Final_data/3.2018_Demographic_Data_By_County.csv")
+#Demographic_Data_By_County_Total_2018 <- read.csv("../Data_Wrangling/Final_data/3.2018_Demographic_Data_By_County_Total.csv")
+Demographic_Data_By_County_2020 <- read.csv("../Data_Wrangling/Final_data/3.2020_Demographic_Data_By_County.csv")
+Demographic_Data_By_County_Total_2020 <- read.csv("../Data_Wrangling/Final_data/3.2020_Demographic_Data_By_County_Total.csv")
+Election_Day_Turnout <- read.csv("../Data_Wrangling/Final_data/5.2020_Election_Day_Turnout.csv")
+library(tidyverse)
+```
+
+
+```{r, include = FALSE}
+# Note: There are only 253 out of the 254 counties here.
+
+# Data cleaning..
+Election_Day_Turnout = Election_Day_Turnout[1:5650,]
+EDT <- Election_Day_Turnout %>% group_by(COUNTY) %>% summarise(election_day_votes=sum(VOTES),.groups = 'drop')
+
+# note that Early_Vote_Data includes years that are NOT 2020! That's what's messing this analysis up..
+(EVD <- Early_Vote_Data[-(1:90),])
+
+```
+### Plotting Early Voting Turnout Compared to Election Day Turnout
+
+```{r, include = FALSE}
+# whole foods counties
+WholeFoodsCounties <- c("El Paso", "Bexar", "Travis", "Williamson", "Montgomery", "Harris", "Fort Bend", "Tarrant", "Dallas", "Collin", "Denton")
+
+
+# error: can only set of variables appears
+new_data <- right_join(EDT,EVD, by = c("COUNTY" = "County")) %>% group_by(COUNTY)
+
+# excluding the last two observations which are missing
+new_data <- new_data[1:252,]
+new_data <- mutate(new_data, early_percent = Cumulative_In_Person_By_Mail
+/Non_Suspense_Voters, day_of_percent = election_day_votes/ Non_Suspense_Voters)
+
+# creating new logical variable
+InWholeFoodsCounty = new_data$COUNTY %in% WholeFoodsCounties
+(newer_data = cbind(new_data,InWholeFoodsCounty))
+
+# running the regression
+early_vs_dayof <- lm(day_of_percent ~ early_percent, data = newer_data)
+```
+
+
+```{r, echo = FALSE}
+#summary(early_vs_dayof)
+
+# making the plot
+ggplot(data = newer_data) +
+  geom_point(mapping = aes(x = early_percent,y = day_of_percent, size = Non_Suspense_Voters, color = InWholeFoodsCounty)) +
+  xlab("Early Vote Percentage") +
+  ylab("Election Day Vote Percentage") +
+  ggtitle("Early Vote vs. Election Day Vote Percentage") +
+  geom_abline(intercept = 0.36902, slope = -0.36902, color = "dark blue")
+
+
+# Divide EDT by  Non_Suspense_Voters
+#EDT$election_day_votes / Early_Vote_Data$Non_Suspense_Voters
+
+
+# Need to build a final data.frame that has county by county variables
+
+# independent variable
+
+# dependent variables..
+```
+
+First, it's important to note that this is not a complete list of observations. There are two counties that are included in the state of Texas that were not included in the election day vote total provided by the state of Texas. These counties are Wichita and Eastland counties. The total number of non-suspended voters in Eastland is 10,922 and in Wichita is 67,126. Neither of these counties is a Whole Foods county.
+
+The plot illustrates the negative linear relationship between the percentage of the early vote (total early votes cast divided by the number of non-suspended voters in the county) and the vote cast on election data (total votes cast on election day divided by the number of non-suspended voters in the county). The more populated Whole Foods counties tended to have a higher early vote percentage and lower election day vote percentage. We ran a linear regression model and plotted the output here. The independent variable early vote percentage is statistically significant at the alpha equals .001 level. The coefficient this term is -0.37890 while the coefficient for the intercept is 0.36902. It is not surprising that there is a negative linear relationship between the two.
+
+
+```{r, include = FALSE}
+# I can do some separate work here...
+summary(lm(day_of_percent + early_percent ~ early_percent, data = newer_data))
+```
+
+
+```{r, include = FALSE}
+# A full analysis of what the best predictors of early vote and final vote were.. 
+# Should I ship a linear regression here..?
+
+
+Demographic_Data_By_County_Total_2020[1,]
+```
+
+

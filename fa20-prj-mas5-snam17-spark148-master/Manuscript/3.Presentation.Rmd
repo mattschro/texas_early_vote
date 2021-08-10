@@ -1,0 +1,533 @@
+---
+title: "Analyzing Texas Election Data Related to the 2020 U.S. Presidential Election"
+author: "Matt Schroeder, Seungwoo Nam, Suyoung Park"
+date: "12/17/2020"
+output:
+  beamer_presentation:
+    theme: "Copenhagen"
+    colortheme: "dolphin"
+    fonttheme: "structurebold"
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+library(tidyverse)
+library(data.table)
+library(reshape2)
+library(gridExtra)
+library(grid)
+library(ggplot2)
+library(choroplethr)
+library(choroplethrMaps)
+library(usmap)
+library(dplyr)
+```
+
+
+## Introduction
+
+- This election cycle, Texas saw more pre-election national political media interest than it had in our lifetimes
+
+- The interest in Texas was partially due to record early vote turnout related to the COVID-19 pandemic
+
+  - 108.3% of the total 2016 turnout was reached *before election day*
+
+- Texas known for low voter turnout in Presidential elections
+
+  - The state ranked 47th nationally for voter turnout in 2008, 2012, and 2016
+
+- Democrats invested in last minute advertisements and a high profile visit by then VP Candidate Kamala Harris
+  
+- Rated as a toss up by NBC's Political Unit and Cook Political Report in late October
+
+- The last time Democrats won Texas was in 1976
+
+  
+## Data Wrangling - Overview
+
+1. \textcolor{red}{Texas Secretary of State} - \textcolor{blue}{html}
+    - Early vote data in Texas from 1996 to 2020
+    - 2018 general election (Senator/Governor) data in Texas  
+    - 2020 election day data in Texas
+2. \textcolor{red}{Harvard Dataverse} - \textcolor{blue}{csv}
+    - Presidential election data from 1976 to 2016  
+3. \textcolor{red}{CENSUS} - \textcolor{blue}{csv}
+    - Demographic data in Texas
+
+\begin{scriptsize}    
+\textcolor{red}{Red color: data sources}\\
+\textcolor{black}{black color: types of our datasets}\\ 
+\textcolor{blue}{blue color: the format of raw data.}\\
+\end{scriptsize}
+
+## Data Wrangling - Texas Secertary of State
+
+\begin{figure}
+   \includegraphics[width=0.8\textwidth]{Figures/DW_Fig1.png} \caption{Raw Data from Texas Secretary of State}
+\end{figure}
+\begin{figure}
+   \includegraphics[width=0.4\textwidth]{Figures/DW_Fig2.png} \caption{Corresponding HTML Code}
+\end{figure}
+
+## Data Wrangling - Texas Secertary of State
+
+1. `rvest` 
+
+2. `XML` and `XML2`
+
+## Data Wrangling - Texas Secertary of State
+
+\tiny
+```{r, echo=FALSE}
+dat<- read.csv("../Data_Wrangling/Final_data/1.Early_Vote_Data.csv")
+tail(dat,5)
+```
+
+## Data Wrangling - 2020 Demographic data
+
+Since CENSUS data contains the observations from 2010 to 2019, we projected the 2020 population based on 2018-2019 data.
+
+- Assumption: **the percent changes of population between 2018-2019 and 2019-2020 are the same**.
+
+$$POP_{2020,j} = (1+\frac{POP_{2019,j}-POP_{2018,j}}{POP_{2018,j}}) *POP_{2019,j}$$
+where $j$ is the each variable.
+
+## Data Wrangling - Result
+
+\begin{table}
+  \includegraphics[width=\textwidth]{Figures/DW_Table1.png} 
+  \caption{Output of Data Wrangling Process}
+\end{table}
+
+## Data Analysis Overview
+
+1. Understanding the Historical Voting Patterns
+2. Understanding the 2020 Early Vote in Texas
+3. Showing the Swing Counties in '18
+4. Investigating the Whole Foods Counties
+5. Understanding Election Day Turnout
+
+## Historic Voting Patterns
+
+
+```{r, include  = FALSE}
+# Reading in the data + importing tidyverse
+General_Election_Data <- read.csv("../Data_Wrangling/Final_data/2.General_Election_Data.csv")
+
+# Plotting the data
+GeneralElectionVisualization <- ggplot(General_Election_Data, aes(x=year,y=candidatevotes/totalvotes)) +
+  geom_point(aes(color = party)) +
+  ggtitle("Two Party Candidate Vote Share by Year") +
+  ylab("Vote % by Party") +
+  xlab("Year") + 
+  scale_color_manual(values=c("#1E90FF", "#FF0000"))
+```
+```{r, echo = FALSE, fig.width = 4, fig.height = 2}
+GeneralElectionVisualization
+```
+
+- Last time a Democrat won the state of Texas was in 1976 (Jimmy Carter's Victory)
+
+- Lower two party vote share in 1992 and 1996
+  - Third party candidate (and Texan) Ross Perot received 22.01% and then 6.75% of the vote
+  
+- Historically, Texas hasn't been close enough to be a toss up
+
+## Historical Early Vote and Mail Data
+
+```{r,include=FALSE}
+# Reading in the dataset
+Early_Vote_Data <- read_csv("../Data_Wrangling/Final_data/1.Early_Vote_Data.csv")
+
+# Case 1: EVD = all counties in 2020 are included
+EVD <- Early_Vote_Data %>% arrange(Year, -Non_Suspense_Voters)
+
+# Case 2: New_EVD15 = only 15 counties in 2020 are included
+New_EVD15 <- EVD[1:105,]
+New_EVD15
+```
+
+```{r,include=FALSE}
+# Case 1: Input = EVD (all counties in 2020 are included); Output = Final_EVD
+(Final_EVD <- EVD  %>% group_by(Year) %>%  summarise(avg_early = mean(Cumulative_Percent_Early_Vote), avg_mail = mean(Cumulative_By_Mail_Percent)))
+
+# Case 2: Input = New_EVD15 (only 15 counties in 2020 are included); Output = Final_EVD15
+(Final_EVD15 <- New_EVD15  %>% group_by(Year) %>%  summarise(avg_early = mean(Cumulative_Percent_Early_Vote), avg_mail = mean(Cumulative_By_Mail_Percent)))
+```
+
+```{r, include=FALSE}
+colnames(Final_EVD) <- c("Year", "Avg_In_Person", "Avg_Mail")
+Final_EVD_graph <- reshape2::melt(Final_EVD, id.vars = 'Year')
+EVD_visual <- ggplot(Final_EVD_graph, aes(x=Year, y = value, fill = variable)) + geom_bar(stat = "identity", position= position_dodge()) + scale_x_continuous(breaks = Final_EVD_graph$Year) + labs(title = "Early Vote by Mail and In Person", x = "Year", y = "Cumulative Early Vote %") + scale_fill_discrete(name = "Voting Methods")+
+  geom_text(aes(label=round(value, 2), vjust = 1.1), position = position_dodge(3.5), size = 3)
+```
+
+```{r, echo = FALSE}
+colnames(Final_EVD15) <- c("Year", "Avg_In_Person", "Avg_Mail")
+Final_EVD15_graph <- reshape2::melt(Final_EVD15, id.vars = 'Year')
+EVD15_visual <- ggplot(Final_EVD15_graph, aes(x=Year, y = value, fill = variable)) + geom_bar(stat = "identity", position= position_dodge()) + scale_x_continuous(breaks = Final_EVD15_graph$Year) + labs(title = "Early Vote by Mail and In Person for the Top 15 Counties", x = "Year", y = "Cumulative Early Vote %") + scale_fill_discrete(name = "Voting Methods")+
+  geom_text(aes(label=round(value, 2), vjust = 1.1), position = position_dodge(3.5), size = 3)
+```
+
+```{r, echo = FALSE, fig.height = 6}
+#grid.arrange(EVD_visual,EVD15_visual,ncol=1)
+EVD15_visual
+```
+
+- 2020 Voting pattern deviates from the historic voting pattern
+
+  - Record setting early in person and mail vote in 2020
+  
+## 2020 Early Vote Percentage By Day
+
+```{r, include=FALSE,fig.height = 6}
+evdbd <- read_csv("../Data_Wrangling/Final_data/1.Early_Vote_Data_By_Day.csv")
+#evdbd <- evdbd %>% arrange(County) %>% filter(Year==2020)
+evdbd[which(evdbd$County == "Lasalle"),2] <- "La Salle"
+evdbd$region <- as.numeric(fips("TX", unlist(evdbd %>% select("County"))))
+total_vote <- sum(evdbd$In_person) + sum(evdbd$Mail)
+evdbd <- evdbd %>% group_by(date) %>% summarise(Total = sum(In_person) + sum(Mail), Totalpec = Total/total_vote)
+cumulative_pec <- round(cumsum(evdbd$Totalpec), 3)
+evdbd_cs <- cbind(evdbd, cumulative_pec)
+```
+
+```{r, echo=FALSE,fig.height = 5.3}
+ggplot(data = evdbd_cs ) +
+  geom_bar(aes(x = `date`, y = `cumulative_pec`, fill = cumulative_pec),stat="identity") + labs(title = "2020 Cumulative Early Vote % By Day", x = "Date", y = "Cumulative Early Vote %")
+```
+
+- When looking at the state's cumulative early votes by day, we see an incredible surge in early voting on October 13th, the first day of early voting. The votes before then represent mail in votes.
+
+
+## Swing Counties from the 2018 Election
+
+```{r, include = FALSE}
+highlight_county = function(county_fips){
+  data(county.map, package="choroplethrMaps", envir=environment())
+  df = county.map[county.map$region %in% county_fips, ]
+  geom_polygon(data=df, aes(long, lat, group = group), color = "yellow", fill = NA, size = 1)
+}
+dat <- read_csv("../Data_Wrangling/Final_data/1.Early_Vote_Data.csv")
+dat <- dat %>% arrange(County) %>% filter(Year==2020)
+dat[which(dat$County == "Lasalle"),1] <- "La Salle"
+dat$region <- as.numeric(fips("TX", unlist(dat %>% select("County"))))
+
+dat_2018 <- read_csv("../Data_Wrangling/Final_data/4.2018_Election_Data.csv")
+dat_2018 <- dat_2018[-c(1,256),] %>% arrange(Race,County)
+dat_2018[which(dat_2018$County == "LASALLE"),1] <- "La Salle"
+dat_2018$region <- as.numeric(fips("TX", unlist(dat_2018 %>% select("County"))))
+dat_2018 <- dat_2018 %>% mutate("value" = ifelse(REP>DEM,"REP","DEM")) #if REP won then 0
+```
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE, fig.height = 5}
+governor <- dat_2018 %>% filter(Race=="Governor") %>% select("region","value")
+senator <- dat_2018 %>% filter(Race=="Senator") %>% select("region","value")
+highlight_region <- governor$region[which(!governor$value == senator$value)]
+plt1 <- county_choropleth(governor,state_zoom = "texas", num_colors=2,legend="Percentage",title="Result of 2018 Governor Election") + highlight_county(highlight_region) + scale_fill_manual(name="Won",values=c("blue","red"))
+
+plt2 <- county_choropleth(senator,state_zoom = "texas", num_colors=2,legend="Percentage",title="Result of 2018 Senator Election") + scale_fill_manual(name="Won",values=c("blue","red"))+ highlight_county(highlight_region)
+grid.arrange(plt1,plt2,ncol=2)
+```
+
+- A small minority of Texas counties are competitive
+  - 12 Counties voted Republican for the Governor Election, but voted Democrat in the Senate Election: Brewster, Fort Bend, Frio, Jefferson, Jim Wells, Kleberg, La Salle, Nueces, Reeves, Tarrant, Val Verde, Williamson
+- This group of counties is to the left of the average Texas county
+
+```{r, include = FALSE, fig.height = 5}
+sub_dat <- dat %>% mutate("value"=Cumulative_In_Person_Percent) %>% select(13,14)
+plt1 <- county_choropleth(sub_dat,state_zoom = "texas", num_colors=1,legend="Percentage",title="By Percentage") + highlight_county(highlight_region) 
+
+sub_dat2 <- sub_dat %>% mutate(value=rank(value,"first")) %>%arrange(-sub_dat$value)
+plt2 <- county_choropleth(sub_dat2,state_zoom = "texas", num_colors=1,title="By Rank",legend="Rank ") + highlight_county(highlight_region) 
+grid.arrange(plt1,plt2,ncol=2)
+```
+
+
+
+
+```{r, include = FALSE,  fig.height = 5}
+sub_dat <- dat %>% mutate("value"=Cumulative_By_Mail_Percent) %>% select(13,14)
+plt1 <- county_choropleth(sub_dat,state_zoom = "texas", num_colors=1,legend="Percentage",title="By Percentage") + highlight_county(highlight_region) 
+sub_dat2 <- sub_dat %>% mutate(value=rank(value,"first")) %>%arrange(-sub_dat$value)
+plt2 <- county_choropleth(sub_dat2,state_zoom = "texas", num_colors=1,title="By Rank",legend="Rank ") + highlight_county(highlight_region) 
+grid.arrange(plt1,plt2,ncol=2)
+```
+
+
+
+```{r, include = FALSE, fig.height = 5}
+sub_dat <- dat %>% mutate("value"= (Cumulative_In_Person+Cumulative_By_Mail)*100/Non_Suspense_Voters) %>% select(13,14)
+plt1 <- county_choropleth(sub_dat,state_zoom = "texas", num_colors=1,legend="Percentage",title="By Percentage") + highlight_county(highlight_region) 
+sub_dat2 <- sub_dat %>% mutate(value=rank(value,"first")) %>%arrange(-sub_dat$value)
+plt2 <- county_choropleth(sub_dat2,state_zoom = "texas", num_colors=1,title="By Rank",legend="Rank ") + highlight_county(highlight_region) 
+grid.arrange(plt1,plt2,ncol=2, bottom = textGrob("Result of 2020 Early Vote (Total)",gp=gpar(fontsize=15)))
+```
+
+
+## Texas Counties with Whole Foods
+```{r importing data, include=FALSE}
+# Importing the Necessary Datasets for this Question
+Early_Vote_Data <- read.csv("../Data_Wrangling/Final_data/1.Early_Vote_Data.csv")
+Early_Vote_Data_By_Day <- read.csv("../Data_Wrangling/Final_data/1.Early_Vote_Data_By_Day.csv")
+Demographic_Data_By_County_2018 <- read.csv("../Data_Wrangling/Final_data/3.2018_Demographic_Data_By_County.csv")
+Demographic_Data_By_County_Total_2018 <- read.csv("../Data_Wrangling/Final_data/3.2018_Demographic_Data_By_County_Total.csv")
+Demographic_Data_By_County_2020 <- read.csv("../Data_Wrangling/Final_data/3.2020_Demographic_Data_By_County.csv")
+Demographic_Data_By_County_Total_2020 <- read.csv("../Data_Wrangling/Final_data/3.2020_Demographic_Data_By_County_Total.csv")
+Election_Day_Turnout <- read.csv("../Data_Wrangling/Final_data/5.2020_Election_Day_Turnout.csv")
+```
+
+- Split the state up into urban and rural areas based on whether or not they have a Whole Foods store
+  - Popularized by prominent political analyst David Wasserman
+- Only 11 counties have a Whole Foods store:
+  - El Paso, Bexar, Travis, Williamson, Montgomery, Harris, Fort Bend, Tarrant, Dallas, Collin, Denton
+  
+- 54.83% of Texas's population lives in one of these 11 counties
+
+
+## Voting Habits of Citizens in Whole Food Counties
+
+```{r, include=FALSE, message=FALSE, warning=FALSE}
+highlight_county = function(county_fips){
+  data(county.map, package="choroplethrMaps", envir=environment())
+  df = county.map[county.map$region %in% county_fips, ]
+  geom_polygon(data=df, aes(long, lat, group = group), color = "yellow", fill = NA, size = 1)
+}
+dat <- read_csv("../Data_Wrangling/Final_data/1.Early_Vote_Data.csv")
+dat <- dat %>% arrange(County) %>% filter(Year==2020)
+dat[which(dat$County == "Lasalle"),1] <- "La Salle"
+dat$region <- as.numeric(fips("TX", unlist(dat %>% select("County"))))
+
+dat_2018 <- read_csv("../Data_Wrangling/Final_data/4.2018_Election_Data.csv")
+dat_2018 <- dat_2018[-c(1,256),] %>% arrange(Race,County)
+dat_2018[which(dat_2018$County == "LASALLE"),1] <- "La Salle"
+dat_2018$region <- as.numeric(fips("TX", unlist(dat_2018 %>% select("County"))))
+dat_2018 <- dat_2018 %>% mutate("value" = ifelse(REP>DEM,"REP","DEM")) #if REP won then 0
+```
+
+
+```{r, include=FALSE}
+WholeFoodsCounties <- c("El Paso", "Bexar", "Travis", "Williamson", "Montgomery", "Harris", "Fort Bend", "Tarrant", "Dallas", "Collin", "Denton")
+test <- dat_2018[dat_2018$County %in% toupper(WholeFoodsCounties),]
+highligh_region2 <- test$region
+```
+
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE, fig.height = 4}
+governor <- dat_2018 %>% filter(Race=="Governor") %>% select("region","value")
+senator <- dat_2018 %>% filter(Race=="Senator") %>% select("region","value")
+plt1 <- county_choropleth(governor,state_zoom = "texas", num_colors=2,legend="Percentage",title="Result of 2018 Governor Election") + highlight_county(highligh_region2) + scale_fill_manual(name="Won",values=c("blue","red"))
+
+plt2 <- county_choropleth(senator,state_zoom = "texas", num_colors=2,legend="Percentage",title="Result of 2018 Senator Election") + scale_fill_manual(name="Won",values=c("blue","red"))+ highlight_county(highligh_region2)
+grid.arrange(plt1,plt2,ncol=2)
+```
+
+- 5 out of 11 counties voted for a Democratic Candidate in the 2018 Governor Election
+
+- 8 out of 11 counties voted for a Democratic Candidate in the 2018 Senator Election
+
+- Urban areas leaning Democratic is not unique to Texas, rather a nationwide phenomena
+  
+## Comparing the Racial Demographics of Whole Foods vs. Non-Whole Foods Counties 
+
+```{r, include=FALSE}
+# Computing the total male and female population in Texas (2020)
+sum(Demographic_Data_By_County_Total_2020$TOT_MALE)
+sum(Demographic_Data_By_County_Total_2020$TOT_FEMALE)
+
+# Computing the total male and female population in Texas (2018)
+sum(Demographic_Data_By_County_Total_2018$TOT_MALE)
+sum(Demographic_Data_By_County_Total_2018$TOT_FEMALE)
+```
+
+```{r, include=FALSE}
+# End goal: Have the total percentage of the population that is each demographic race in whole foods and non-whole foods counties..
+# Breaking up the 2018 demographic data by Whole Foods Counties and Non-Whole Foods Counties
+whole_foods_dem_data_18 <- Demographic_Data_By_County_Total_2018[Demographic_Data_By_County_Total_2018$CTYNAME %in% WholeFoodsCounties,]
+non_whole_foods_dem_data_18 <- Demographic_Data_By_County_Total_2018[!(Demographic_Data_By_County_Total_2018$CTYNAME %in% WholeFoodsCounties),]
+# Whole foods demographic breakdown
+whole_foods_dem_data_18_final <- summarise(whole_foods_dem_data_18, perc_white = sum(WA_MALE + WA_FEMALE)/ sum(TOT_POP),
+                           perc_black = sum(BA_MALE + BA_FEMALE)/ sum(TOT_POP),
+                           perc_indian = sum(IA_MALE + IA_FEMALE)/ sum(TOT_POP),
+                           perc_asian = sum(AA_MALE + AA_FEMALE)/ sum(TOT_POP),
+                           perc_na = sum(NA_MALE + NA_FEMALE)/ sum(TOT_POP),
+                           perc_two = sum(TOM_MALE + TOM_FEMALE)/ sum(TOT_POP),
+                           perc_hisp = sum(H_MALE + H_FEMALE)/ sum(TOT_POP),
+                           perc_nh = sum(NH_MALE + NH_FEMALE)/ sum(TOT_POP))[1,]
+
+# White %, Black %, Indian %, Asian %, American Indian %, Hispanic %, Two or more races % (hopefully should add up to 1)
+whole_foods_dem_data_18_final[1:6]
+# Hispanic and non-hispanic
+whole_foods_dem_data_18_final[7:8]
+# Non - Whole foods demographic breakdown
+non_whole_foods_dem_data_18_final <- summarise(non_whole_foods_dem_data_18, perc_white = sum(WA_MALE + WA_FEMALE)/ sum(TOT_POP),
+                           perc_black = sum(BA_MALE + BA_FEMALE)/ sum(TOT_POP),
+                           perc_indian = sum(IA_MALE + IA_FEMALE)/ sum(TOT_POP),
+                           perc_asian = sum(AA_MALE + AA_FEMALE)/ sum(TOT_POP),
+                           perc_na = sum(NA_MALE + NA_FEMALE)/ sum(TOT_POP),
+                           perc_two = sum(TOM_MALE + TOM_FEMALE)/ sum(TOT_POP),
+                           perc_hisp = sum(H_MALE + H_FEMALE)/ sum(TOT_POP),
+                           perc_nh = sum(NH_MALE + NH_FEMALE)/ sum(TOT_POP))[1,]
+
+# White %, Black %, Indian %, Asian %, American Indian %, Hispanic %, Two or more races % (hopefully should add up to 1)
+non_whole_foods_dem_data_18_final[1:6]
+# Hispanic and non-hispanic
+non_whole_foods_dem_data_18_final[7:8]
+```
+
+```{r, echo=FALSE,out.width="70%", message=FALSE, warning=FALSE}
+# WHOLE FOODS COUNTIES
+
+dem_plots_WF <- data.frame(
+  dem_percentages <- c(whole_foods_dem_data_18_final$perc_white, whole_foods_dem_data_18_final$perc_black, whole_foods_dem_data_18_final$perc_indian, whole_foods_dem_data_18_final$perc_asian, whole_foods_dem_data_18_final$perc_na, whole_foods_dem_data_18_final$perc_two),
+  ethnicities <- c("White", "Black", "Indian", "Asian", "NA", "Two or More")
+) 
+
+
+# (1) Plotting the ethnicity breakdown in Texas Whole Foods Counties
+wf <- ggplot(dem_plots_WF, aes(x = "", y = dem_percentages, fill = ethnicities)) +
+ geom_bar( width=1, stat = "identity") + 
+ coord_polar("y", start=0) +
+  labs(y="Whole Foods Counties",fill="Ethicity",x="")+
+  scale_fill_brewer(palette="Blues")
+
+# NON-WHOLE FOODS COUNTIES
+
+dem_plots_NON_WF <- data.frame(
+  dem_percentages2 <- c(non_whole_foods_dem_data_18_final$perc_white, non_whole_foods_dem_data_18_final$perc_black, non_whole_foods_dem_data_18_final$perc_indian, non_whole_foods_dem_data_18_final$perc_asian, non_whole_foods_dem_data_18_final$perc_na, non_whole_foods_dem_data_18_final$perc_two),
+  ethnicities2 <- c("White", "Black", "Indian", "Asian", "NA", "Two or More")
+) 
+
+
+# (2) Plotting the ethnicity breakdown in Texas Whole Foods Counties
+nwf <- ggplot(dem_plots_NON_WF, aes(x = "", y = dem_percentages2, fill = ethnicities2)) +
+ geom_bar( width=1, stat = "identity") + 
+ coord_polar("y", start=0) +
+  labs(y="NON Whole Foods Counties",fill="Ethicity",x="")+
+  scale_fill_brewer(palette="Reds")
+
+grid.arrange(wf,nwf,ncol=2)
+
+```
+
+- The clearest difference is that the Whole Foods counties have a lower percentage of White residents and a higher percentage of African and Asian Americans compared to non-Whole Foods counties.
+
+## Hispanic vs. Non-Hispanic Populations
+
+```{r, echo=FALSE,out.width="70%", message=FALSE, warning=FALSE}
+# (3) Hispanic vs. Non-Hispanic Plot
+dem_plots_hispanic <- data.frame("percentage"=c(35.79,64.21,35.46,64.53),
+                                 "Ethicity"=c("Hispanic","Non-Hispanic","Hispanic","Non-Hispanic"),
+                                 "Whole_Foods"=c("Whole_Foods","Whole_Foods","Non_Whole_Foods","Non_Whole_Foods"))
+ggplot(dem_plots_hispanic,aes(x=as.factor(Ethicity),y=percentage,color=as.factor(Ethicity),alpha=Whole_Foods ))+
+  geom_bar(stat="identity",position="dodge")+
+  guides(color = guide_legend(override.aes = list(fill = "white"))) +
+  labs(title="Ethnic Breakdown Whole Foods vs. NON Whole Foods Counties", x="Ethicity",y="% of Population")
+```
+
+- The Hispanic population of the two sets of counties is within one percent.
+  - On the previous slide Hispanics are grouped with Whites, this shows Whites grouped with other races as Non-Hispanic
+
+## Age Distribution of Whole Food Counties vs Non Whole Food Counties. 
+
+```{r, include=FALSE}
+# Output = population of each age group in Whole Foods Counties (combined)
+whole_foods_age_data_18 <- Demographic_Data_By_County_2018[Demographic_Data_By_County_2018$CTYNAME %in% WholeFoodsCounties,]
+whole_foods_age_data_18_FINAL <- whole_foods_age_data_18 %>% group_by(AGEGRP) %>% summarise(pop=sum(TOT_POP),.groups = 'drop')
+whole_foods_age_data_18_FINAL <- whole_foods_age_data_18_FINAL %>% mutate(perc = pop/sum(pop)*100)
+
+# Output = population of each age group in NON Whole Foods Counties (combined)
+non_whole_foods_age_data_18 <- Demographic_Data_By_County_2018[!(Demographic_Data_By_County_2018$CTYNAME %in% WholeFoodsCounties),]
+non_whole_foods_age_data_18_FINAL <- non_whole_foods_age_data_18 %>% group_by(AGEGRP) %>% summarise(pop=sum(TOT_POP),.groups = 'drop')
+non_whole_foods_age_data_18_FINAL <- non_whole_foods_age_data_18_FINAL %>% mutate(perc = pop/sum(pop)*100)
+
+```
+
+```{r, message=FALSE,warning=FALSE, echo=FALSE, fig.height = 4.45}
+whole_foods_age_data_18_FINAL$County <- "Whole Foods"
+non_whole_foods_age_data_18_FINAL$County <- "Non Whole Foods"
+Combined_data_18_FINAL <- rbind(whole_foods_age_data_18_FINAL,non_whole_foods_age_data_18_FINAL)
+# Plotting age group vs. percentage of the population in Whole Foods Counties
+ggplot(Combined_data_18_FINAL,aes(x=as.factor(AGEGRP),y=perc,color=as.factor(AGEGRP),alpha=County ))+
+  geom_bar(stat="identity",position="dodge")+
+  scale_color_discrete(name="Age Group",
+                       labels=c("5: AGE 20 to 24","6: AGE 25 to 29","7: AGE 30 to 34","8: AGE 35 to 39",
+                             "9: AGE 40 to 44","10: AGE 45 to 49","11: AGE 50 to 54","12: AGE 55 to 59",
+                             "13: AGE 60 to 64","14: AGE 65 to 69","15: AGE 70 to 74",
+                             "16: AGE 75 to 79","17: AGE 80 to 84","18: AGE 85 or older"))+
+  guides(color = guide_legend(override.aes = list(fill = "white"))) +
+  labs(title="Percent of Population by Age Group and County", x="Age Group",y="% of Population") + scale_size(range = c(0.1, 10))
+```
+
+-  Non Whole Food Counties have a larger population of citizens of age 20-24 and age groups 55-59 and higher. 
+
+- Whole Food Counties has a larger population of citizens from age groups 25-29 to 50-54. 
+
+## Early Vote vs. Election Day Turnout
+
+```{r, include = FALSE}
+# Note: There are only 253 out of the 254 counties here.
+
+# Data cleaning..
+Election_Day_Turnout = Election_Day_Turnout[1:5650,]
+EDT <- Election_Day_Turnout %>% group_by(COUNTY) %>% summarise(election_day_votes=sum(VOTES),.groups = 'drop')
+
+# note that Early_Vote_Data includes years that are NOT 2020! That's what's messing this analysis up..
+(EVD <- Early_Vote_Data[-(1:90),])
+
+```
+
+```{r, include = FALSE}
+# whole foods counties
+WholeFoodsCounties <- c("El Paso", "Bexar", "Travis", "Williamson", "Montgomery", "Harris", "Fort Bend", "Tarrant", "Dallas", "Collin", "Denton")
+
+
+# error: can only set of variables appears
+new_data <- right_join(EDT,EVD, by = c("COUNTY" = "County")) %>% group_by(COUNTY)
+
+# excluding the last two observations which are missing
+new_data <- new_data[1:252,]
+new_data <- mutate(new_data, early_percent = Cumulative_In_Person_By_Mail
+/Non_Suspense_Voters, day_of_percent = election_day_votes/ Non_Suspense_Voters)
+
+# creating new logical variable
+InWholeFoodsCounty = new_data$COUNTY %in% WholeFoodsCounties
+(newer_data = cbind(new_data,InWholeFoodsCounty))
+
+# running the regression
+early_vs_dayof <- lm(day_of_percent ~ early_percent, data = newer_data)
+```
+
+```{r, echo = FALSE, fig.height = 5}
+#summary(early_vs_dayof)
+
+# making the plot
+ggplot(data = newer_data) +
+  geom_point(mapping = aes(x = early_percent,y = day_of_percent, size = Non_Suspense_Voters, color = InWholeFoodsCounty)) +
+  xlab("Early Vote Percentage") +
+  ylab("Election Day Vote Percentage") +
+  ggtitle("Early Vote vs. Election Day Vote Percentage") +
+  geom_abline(intercept = 0.36902, slope = -0.36902, color = "dark blue")
+```
+
+- Early vote turnout was negatively correlated with Election Day turnout
+
+- Whole Foods counties had higher early vote turnout and lower election day turnout
+
+## Conclusion
+
+- Ultimately, Republicans took the state again by 5.6% of the votes making it their 11th Presidential win in the state in a row
+
+- Our research gave some context to why many considered the state to be a toss up state due to the early vote. 
+
+- We showed how the voting patterns deviated from historic norms this election cycle. 
+
+- We invesigated the swing counties from 2018
+
+- Provided an extensive look at how the constituents in the Whole Foods counties and non-Whole Foods counties differ by race, age, and political preferences. 
+
+- We examined election day vs. early vote turnout.
+

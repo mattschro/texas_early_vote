@@ -1,0 +1,45 @@
+---
+runtime: shiny
+---
+
+```{r, include=FALSE}
+library(shiny)
+library(choroplethr)
+library(choroplethrMaps)
+library(mapproj)
+library(tidyverse)
+library(data.table)
+library(usmap)
+```
+
+```{r,include=FALSE}
+by_day <- read_csv("../../Data_Wrangling/Final_data/1.Early_Vote_Data_By_Day.csv")
+by_day <- by_day %>% arrange(date,County)
+by_day[which(by_day$County == "Lasalle"),2] <- "La Salle"
+by_day$region <- as.numeric(rep(fips("TX", unlist(by_day %>% filter(date=="2020-10-04") %>% select("County"))),(nrow(by_day)/254)))
+sub_dat <- by_day %>% mutate("Total_Percentage"=round(((In_person+Mail)*100/Non_Suspense_Voters),2)) %>% group_by(County) %>% mutate("value"=cumsum(Total_Percentage)) %>% select(c("County","date","region","value"))
+```
+
+```{r, echo=FALSE}
+ui <-  fluidPage(    
+  titlePanel("Result of Early Vote by Day"),
+  fluidRow(
+    sidebarLayout(      
+      sidebarPanel(
+        sliderInput(inputId = "day",
+                    "Dates:",
+                    min = as.Date("2020-10-04","%Y-%m-%d"),
+                    max = as.Date("2020-10-30","%Y-%m-%d"),value=as.Date("2020-10-04","%Y-%m-%d"),timeFormat="%Y-%m-%d")),
+        mainPanel(plotOutput("Cumsum_By_Day"))
+      )
+  )
+)
+server <- function(input, output) {
+    output$Cumsum_By_Day <- renderPlot({
+    county_choropleth((sub_dat %>% filter(date==input$day)),
+                      state_zoom = "texas", legend="Percentage",
+                      num_colors = 1)
+  })
+}
+shinyApp(ui, server,option=list(height=480))
+```

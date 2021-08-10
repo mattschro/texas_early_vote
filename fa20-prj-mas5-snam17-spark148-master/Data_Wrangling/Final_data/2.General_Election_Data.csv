@@ -1,0 +1,23 @@
+year,candidate,party,candidatevotes,totalvotes,Result
+1976,"Carter, Jimmy",democrat,2082319,4071884,winner
+1976,"Ford, Gerald",republican,1953300,4071884,runners-up
+1980,"Reagan, Ronald",republican,2510705,4541636,winner
+1980,"Carter, Jimmy",democrat,1881147,4541636,runners-up
+1984,"Reagan, Ronald",republican,3433428,5397571,winner
+1984,"Mondale, Walter",democrat,1949276,5397571,runners-up
+1988,"Bush, George H.W.",republican,3036829,5427410,winner
+1988,"Dukakis, Michael",democrat,2352748,5427410,runners-up
+1992,"Bush, George H.W.",republican,2496071,6154018,winner
+1992,"Clinton, Bill",democrat,2281815,6154018,runners-up
+1996,"Dole, Robert",republican,2736167,5611644,winner
+1996,"Clinton, Bill",democrat,2459683,5611644,runners-up
+2000,"Bush, George W.",republican,3799639,6407637,winner
+2000,"Gore, Al",democrat,2433746,6407637,runners-up
+2004,"Bush, George W.",republican,4526917,7410749,winner
+2004,"Kerry, John",democrat,2832704,7410749,runners-up
+2008,"McCain, John",republican,4479328,8077795,winner
+2008,"Obama, Barack H.",democrat,3528633,8077795,runners-up
+2012,"Romney, Mitt",republican,4569843,7993851,winner
+2012,"Obama, Barack H.",democrat,3308124,7993851,runners-up
+2016,"Trump, Donald J.",republican,4685047,8969226,winner
+2016,"Clinton, Hillary",democrat,3877868,8969226,runners-up

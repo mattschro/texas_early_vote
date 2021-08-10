@@ -1,0 +1,267 @@
+```{r library, include=FALSE}
+library(tidyverse)
+library(data.table)
+library(ggplot2)
+library(gridExtra)
+library(grid)
+library(choroplethr)
+library(choroplethrMaps)
+library(tidyverse)
+library(usmap)
+```
+
+```{r importing data, include=FALSE}
+# Importing the Necessary Datasets for this Question
+Early_Vote_Data <- read.csv("../Data_Wrangling/Final_data/1.Early_Vote_Data.csv")
+Early_Vote_Data_By_Day <- read.csv("../Data_Wrangling/Final_data/1.Early_Vote_Data_By_Day.csv")
+Demographic_Data_By_County_2018 <- read.csv("../Data_Wrangling/Final_data/3.2018_Demographic_Data_By_County.csv")
+Demographic_Data_By_County_Total_2018 <- read.csv("../Data_Wrangling/Final_data/3.2018_Demographic_Data_By_County_Total.csv")
+Demographic_Data_By_County_2020 <- read.csv("../Data_Wrangling/Final_data/3.2020_Demographic_Data_By_County.csv")
+Demographic_Data_By_County_Total_2020 <- read.csv("../Data_Wrangling/Final_data/3.2020_Demographic_Data_By_County_Total.csv")
+Election_Day_Turnout <- read.csv("../Data_Wrangling/Final_data/5.2020_Election_Day_Turnout.csv")
+```
+
+
+#### Whole Food Counties Backstory and Process 
+
+Another way of thinking about how to split up the vote in Texas is by using the counties that have Whole Foods stores located in them to essentially split the state up into urban and rural areas. This method was popularized by prominent political analyst David Wasserman of the Cook Political Report, who can be frequently found tweeting about "Whole Foods counties" in the days leading up to any large election.
+
+Since there were no existing data for which counties in Texas have a Whole Foods store, we manually created the data set based on the Whole Foods store locator combined with Google Maps. The cities and counties that Whole Foods are located in Texas are as follows: El Paso (El Paso County), San Antonio (Bexar County), Austin (Travis and Williamson Counties), Houston (Montgomery, Harris, and Fort Bend Counties), Dallas Fort Worth (Dallas, Collin, Denton, and Tarrant Counties). This is a total of 11 counties. So of the 254 counties in the state of Texas, 243 of them are not "Whole Foods Counties."
+
+The 11 counties in the state that have a Whole Foods in them are large urban centers that skew Democratic compared to the rest of the state, which leans Republican. We now explore other characteristics that make the counties different.
+
+```{r creating whole foods lists, include=FALSE}
+# Making a list of counties in Texas that have a Whole Foods in them
+WholeFoodsCounties <- c("El Paso", "Bexar", "Travis", "Williamson", "Montgomery", "Harris", "Fort Bend", "Tarrant", "Dallas", "Collin", "Denton")
+```
+
+#### Calculating the Texas Population Inside and Outside of Whole Foods Counties
+
+```{r population, include = FALSE}
+#Demographic_Data_By_County_2020
+whole_foods_population <- sum(Demographic_Data_By_County_Total_2020[Demographic_Data_By_County_Total_2020$CTYNAME %in% WholeFoodsCounties,2])
+non_whole_foods_population <- sum(Demographic_Data_By_County_Total_2020[!(Demographic_Data_By_County_Total_2020$CTYNAME %in% WholeFoodsCounties),2])
+texas_population <- whole_foods_population + non_whole_foods_population
+# Whole Foods / Non-Whole Foods population as a percentage of the total population
+perc1 <- round(whole_foods_population/texas_population*100,2)
+perc2 <- round(non_whole_foods_population/texas_population*100,2)
+```
+
+Of the total Texas population, `r perc1`% lives in one of these 11 counties, while the rest of population (`r perc2`%) lives in one of the 243 counties without a Whole Foods located within its boundaries.
+
+
+```{r, include =FALSE}
+dat <- read_csv("../Data_Wrangling/Final_data/1.Early_Vote_Data.csv")
+dat <- dat %>% arrange(County) %>% filter(Year==2020)
+dat[which(dat$County == "Lasalle"),1] <- "La Salle"
+dat$region <- as.numeric(fips("TX", unlist(dat %>% select("County"))))
+
+
+
+sub_dat <- dat %>% mutate("value"=ifelse(dat$County %in% WholeFoodsCounties, 1, 0)) %>% select("County", 13,14)
+
+plt1 <- county_choropleth(sub_dat,state_zoom = "texas",legend="Whole Foods exist"  ,num_colors=0,title="Counties with Whole Foods")
+
+plt1
+```
+
+
+#### Maping Out the Whole Foods Counties vs. Non-Whole Foods Counties 
+
+```{r, include=FALSE, message=FALSE, warning=FALSE}
+highlight_county = function(county_fips){
+  data(county.map, package="choroplethrMaps", envir=environment())
+  df = county.map[county.map$region %in% county_fips, ]
+  geom_polygon(data=df, aes(long, lat, group = group), color = "yellow", fill = NA, size = 1)
+}
+dat <- read_csv("../Data_Wrangling/Final_data/1.Early_Vote_Data.csv")
+dat <- dat %>% arrange(County) %>% filter(Year==2020)
+dat[which(dat$County == "Lasalle"),1] <- "La Salle"
+dat$region <- as.numeric(fips("TX", unlist(dat %>% select("County"))))
+
+dat_2018 <- read_csv("../Data_Wrangling/Final_data/4.2018_Election_Data.csv")
+dat_2018 <- dat_2018[-c(1,256),] %>% arrange(Race,County)
+dat_2018[which(dat_2018$County == "LASALLE"),1] <- "La Salle"
+dat_2018$region <- as.numeric(fips("TX", unlist(dat_2018 %>% select("County"))))
+dat_2018 <- dat_2018 %>% mutate("value" = ifelse(REP>DEM,"REP","DEM")) #if REP won then 0
+```
+
+
+```{r, include = FALSE}
+test <- dat_2018[dat_2018$County %in% toupper(WholeFoodsCounties),]
+highligh_region2 <- test$region
+```
+
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE}
+governor <- dat_2018 %>% filter(Race=="Governor") %>% select("region","value")
+senator <- dat_2018 %>% filter(Race=="Senator") %>% select("region","value")
+plt1 <- county_choropleth(governor,state_zoom = "texas", num_colors=2,legend="Percentage",title="Result of 2018 Governor Election") + highlight_county(highligh_region2) + scale_fill_manual(name="Won",values=c("blue","red"))
+
+plt2 <- county_choropleth(senator,state_zoom = "texas", num_colors=2,legend="Percentage",title="Result of 2018 Senator Election") + scale_fill_manual(name="Won",values=c("blue","red"))+ highlight_county(highligh_region2)
+grid.arrange(plt1,plt2,ncol=2, bottom = textGrob("Result of 2018 Election",gp=gpar(fontsize=15)))
+```
+
+
+
+#### Early Vote in Whole Foods vs. Non-Whole Foods Counties
+
+```{r early vote percenage, include = FALSE}
+# Average Early Vote in Whole Foods Counties
+sum(Early_Vote_Data[(Early_Vote_Data$Year == 2020)  &  (Early_Vote_Data$County %in% WholeFoodsCounties) ,"Cumulative_Percent_Early_Vote"])/11
+
+# Average Early Vote NOT in Whole Foods Counties
+sum(Early_Vote_Data[(Early_Vote_Data$Year == 2020)  &  !(Early_Vote_Data$County %in% WholeFoodsCounties) ,"Cumulative_Percent_Early_Vote"])/243
+```
+
+```{r total early vote, include = FALSE}
+# Total Early Vote in Whole Foods Counties
+whole_foods_ev <- sum(Early_Vote_Data[(Early_Vote_Data$Year == 2020)  &  (Early_Vote_Data$County %in% WholeFoodsCounties) ,"Cumulative_In_Person_By_Mail"])
+# Total Early Vote NOT in Whole Foods Counties
+non_whole_foods_ev <- sum(Early_Vote_Data[(Early_Vote_Data$Year == 2020)  & !(Early_Vote_Data$County %in% WholeFoodsCounties) ,"Cumulative_In_Person_By_Mail"])
+total_ev <- whole_foods_ev + non_whole_foods_ev
+# Whole Foods early vote as a percentage of the total early votes
+whole_foods_perc <- round((whole_foods_ev / total_ev),4) * 100
+# NON Whole Foods early vote as a percentage of the total early votes
+non_whole_foods_perc <- non_whole_foods_ev / total_ev
+```
+
+While the Whole Foods counties accounted for `r perc1`% of the total Texas population, they account for `r whole_foods_perc`% of the early vote in Texas for the 2020 election, accounting for 5,507,445 of the 9,702,659 state-wide early votes.
+
+Interestingly, the non Whole Foods counties outperformed the Whole Foods counties in terms of their early voting numbers, as the non Whole Foods counties accounted for a higher percentage of the early vote compared to their percentage of the overall population. 
+
+#### Comparing the Racial Demographics of Whole Foods vs. Non-Whole Foods Counties 
+
+```{r, include=FALSE}
+# Computing the total male and female population in Texas (2020)
+sum(Demographic_Data_By_County_Total_2020$TOT_MALE)
+sum(Demographic_Data_By_County_Total_2020$TOT_FEMALE)
+
+# Computing the total male and female population in Texas (2018)
+sum(Demographic_Data_By_County_Total_2018$TOT_MALE)
+sum(Demographic_Data_By_County_Total_2018$TOT_FEMALE)
+```
+
+```{r, include=FALSE}
+# End goal: Have the total percentage of the population that is each demographic race in whole foods and non-whole foods counties..
+# Breaking up the 2018 demographic data by Whole Foods Counties and Non-Whole Foods Counties
+whole_foods_dem_data_18 <- Demographic_Data_By_County_Total_2018[Demographic_Data_By_County_Total_2018$CTYNAME %in% WholeFoodsCounties,]
+non_whole_foods_dem_data_18 <- Demographic_Data_By_County_Total_2018[!(Demographic_Data_By_County_Total_2018$CTYNAME %in% WholeFoodsCounties),]
+# Whole foods demographic breakdown
+whole_foods_dem_data_18_final <- summarise(whole_foods_dem_data_18, perc_white = sum(WA_MALE + WA_FEMALE)/ sum(TOT_POP),
+                           perc_black = sum(BA_MALE + BA_FEMALE)/ sum(TOT_POP),
+                           perc_indian = sum(IA_MALE + IA_FEMALE)/ sum(TOT_POP),
+                           perc_asian = sum(AA_MALE + AA_FEMALE)/ sum(TOT_POP),
+                           perc_na = sum(NA_MALE + NA_FEMALE)/ sum(TOT_POP),
+                           perc_two = sum(TOM_MALE + TOM_FEMALE)/ sum(TOT_POP),
+                           perc_hisp = sum(H_MALE + H_FEMALE)/ sum(TOT_POP),
+                           perc_nh = sum(NH_MALE + NH_FEMALE)/ sum(TOT_POP))[1,]
+
+# White %, Black %, Indian %, Asian %, American Indian %, Hispanic %, Two or more races % (hopefully should add up to 1)
+whole_foods_dem_data_18_final[1:6]
+# Hispanic and non-hispanic
+whole_foods_dem_data_18_final[7:8]
+# Non - Whole foods demographic breakdown
+non_whole_foods_dem_data_18_final <- summarise(non_whole_foods_dem_data_18, perc_white = sum(WA_MALE + WA_FEMALE)/ sum(TOT_POP),
+                           perc_black = sum(BA_MALE + BA_FEMALE)/ sum(TOT_POP),
+                           perc_indian = sum(IA_MALE + IA_FEMALE)/ sum(TOT_POP),
+                           perc_asian = sum(AA_MALE + AA_FEMALE)/ sum(TOT_POP),
+                           perc_na = sum(NA_MALE + NA_FEMALE)/ sum(TOT_POP),
+                           perc_two = sum(TOM_MALE + TOM_FEMALE)/ sum(TOT_POP),
+                           perc_hisp = sum(H_MALE + H_FEMALE)/ sum(TOT_POP),
+                           perc_nh = sum(NH_MALE + NH_FEMALE)/ sum(TOT_POP))[1,]
+
+# White %, Black %, Indian %, Asian %, American Indian %, Hispanic %, Two or more races % (hopefully should add up to 1)
+non_whole_foods_dem_data_18_final[1:6]
+# Hispanic and non-hispanic
+non_whole_foods_dem_data_18_final[7:8]
+```
+
+```{r, echo=FALSE,out.width="70%", message=FALSE, warning=FALSE}
+# WHOLE FOODS COUNTIES
+
+dem_plots_WF <- data.frame(
+  dem_percentages <- c(whole_foods_dem_data_18_final$perc_white, whole_foods_dem_data_18_final$perc_black, whole_foods_dem_data_18_final$perc_indian, whole_foods_dem_data_18_final$perc_asian, whole_foods_dem_data_18_final$perc_na, whole_foods_dem_data_18_final$perc_two),
+  ethnicities <- c("White", "Black", "Indian", "Asian", "NA", "Two or More")
+) 
+
+
+# (1) Plotting the ethnicity breakdown in Texas Whole Foods Counties
+wf <- ggplot(dem_plots_WF, aes(x = "", y = dem_percentages, fill = ethnicities)) +
+ geom_bar( width=1, stat = "identity") + 
+ coord_polar("y", start=0) +
+  labs(y="Whole Foods Counties",fill="Ethicity",x="")+
+  scale_fill_brewer(palette="Blues")
+
+# NON-WHOLE FOODS COUNTIES
+
+dem_plots_NON_WF <- data.frame(
+  dem_percentages2 <- c(non_whole_foods_dem_data_18_final$perc_white, non_whole_foods_dem_data_18_final$perc_black, non_whole_foods_dem_data_18_final$perc_indian, non_whole_foods_dem_data_18_final$perc_asian, non_whole_foods_dem_data_18_final$perc_na, non_whole_foods_dem_data_18_final$perc_two),
+  ethnicities2 <- c("White", "Black", "Indian", "Asian", "NA", "Two or More")
+) 
+
+
+# (2) Plotting the ethnicity breakdown in Texas Whole Foods Counties
+nwf <- ggplot(dem_plots_NON_WF, aes(x = "", y = dem_percentages2, fill = ethnicities2)) +
+ geom_bar( width=1, stat = "identity") + 
+ coord_polar("y", start=0) +
+  labs(y="NON Whole Foods Counties",fill="Ethicity",x="")+
+  scale_fill_brewer(palette="Reds")
+
+grid.arrange(wf,nwf,ncol=2)
+
+```
+
+As shown on the charts, there is a clear difference in demographics between the counties with Whole Foods and the counties without a Whole Foods location. The counties without a Whole Foods tend to have a higher percentage of whites and lower percentage of African Americans and Asian Americans.
+
+#### Hispanic vs. Non-Hispanic Populations
+
+```{r, echo=FALSE,out.width="70%", message=FALSE, warning=FALSE}
+# (3) Hispanic vs. Non-Hispanic Plot
+dem_plots_hispanic <- data.frame("percentage"=c(35.79,64.21,35.46,64.53),
+                                 "Ethicity"=c("Hispanic","Non-Hispanic","Hispanic","Non-Hispanic"),
+                                 "Whole_Foods"=c("Whole_Foods","Whole_Foods","Non_Whole_Foods","Non_Whole_Foods"))
+ggplot(dem_plots_hispanic,aes(x=as.factor(Ethicity),y=percentage,color=as.factor(Ethicity),alpha=Whole_Foods ))+
+  geom_bar(stat="identity",position="dodge")+
+  guides(color = guide_legend(override.aes = list(fill = "white"))) +
+  labs(title="Ethnic Breakdown in NON Whole Foods Counties", x="Ethicity",y="% of Population")
+```
+
+As seen in an earlier step the hispanic population was within one percent for the two groups. 
+
+#### Comparing the Age Distributions
+
+```{r, include=FALSE}
+# Output = population of each age group in Whole Foods Counties (combined)
+whole_foods_age_data_18 <- Demographic_Data_By_County_2018[Demographic_Data_By_County_2018$CTYNAME %in% WholeFoodsCounties,]
+whole_foods_age_data_18_FINAL <- whole_foods_age_data_18 %>% group_by(AGEGRP) %>% summarise(pop=sum(TOT_POP),.groups = 'drop')
+whole_foods_age_data_18_FINAL <- whole_foods_age_data_18_FINAL %>% mutate(perc = pop/sum(pop)*100)
+
+# Output = population of each age group in NON Whole Foods Counties (combined)
+non_whole_foods_age_data_18 <- Demographic_Data_By_County_2018[!(Demographic_Data_By_County_2018$CTYNAME %in% WholeFoodsCounties),]
+non_whole_foods_age_data_18_FINAL <- non_whole_foods_age_data_18 %>% group_by(AGEGRP) %>% summarise(pop=sum(TOT_POP),.groups = 'drop')
+non_whole_foods_age_data_18_FINAL <- non_whole_foods_age_data_18_FINAL %>% mutate(perc = pop/sum(pop)*100)
+
+```
+
+```{r, message=FALSE,warning=FALSE, echo=FALSE}
+whole_foods_age_data_18_FINAL$County <- "Whole Foods"
+non_whole_foods_age_data_18_FINAL$County <- "Non Whole Foods"
+Combined_data_18_FINAL <- rbind(whole_foods_age_data_18_FINAL,non_whole_foods_age_data_18_FINAL)
+# Plotting age group vs. percentage of the population in Whole Foods Counties
+ggplot(Combined_data_18_FINAL,aes(x=as.factor(AGEGRP),y=perc,color=as.factor(AGEGRP),alpha=County ))+
+  geom_bar(stat="identity",position="dodge")+
+  scale_color_discrete(name="Age Group",
+                       labels=c("5: AGE 20 to 24","6: AGE 25 to 29","7: AGE 30 to 34","8: AGE 35 to 39",
+                             "9: AGE 40 to 44","10: AGE 45 to 49","11: AGE 50 to 54","12: AGE 55 to 59",
+                             "13: AGE 60 to 64","14: AGE 65 to 69","15: AGE 70 to 74",
+                             "16: AGE 75 to 79","17: AGE 80 to 84","18: AGE 85 or older"))+
+  guides(color = guide_legend(override.aes = list(fill = "white"))) +
+  labs(title="Percent of Population by Age Group and County", x="Age Group",y="% of Population")
+```
+
+When comparing the two age plots side by side, it is clear that there are differences in the distribution of the ages between the two groups of counties. 
+
+There are more 20 to 24 years olds in the non-Whole Foods counties. From the 25 to 29 age group to the 50 to 54 age group, the Whole Foods counties lead the non-Whole Foods counties in population. For the 55 to 59 age group up and up, the non-Whole foods counties lead. Considering that the younger groups make up a larger percentage of the overall population, the Whole Foods counties clearly have a larger percentage of young people.
+
+
